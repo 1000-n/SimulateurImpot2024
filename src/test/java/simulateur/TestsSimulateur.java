@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.api.Tag;
 
 import java.util.stream.Stream;
 
@@ -44,6 +45,7 @@ public class TestsSimulateur {
     @DisplayName("Tests des abattements pour les foyers fiscaux")
     @ParameterizedTest
     @MethodSource( "donneesAbattementFoyerFiscal" )
+    @Tag("Nominal")
     public void testAbattement( int revenuNetDeclarant1, String situationFamiliale, int nbEnfantsACharge,
                                    int nbEnfantsSituationHandicap, boolean parentIsole, int abattementAttendu) {
 
@@ -78,6 +80,7 @@ public class TestsSimulateur {
     @DisplayName("Tests du calcul des parts pour différents foyers fiscaux")
     @ParameterizedTest
     @MethodSource( "donneesPartsFoyerFiscal" )
+    @Tag("Nominal")
     public void testNombreDeParts( int revenuNetDeclarant1, String situationFamiliale, int nbEnfantsACharge,
                                    int nbEnfantsSituationHandicap, boolean parentIsole, double nbPartsAttendu) {
 
@@ -111,6 +114,7 @@ public class TestsSimulateur {
     @DisplayName("Tests des différents taux marginaux d'imposition")
     @ParameterizedTest
     @MethodSource( "donneesRevenusFoyerFiscal" )
+    @Tag("Nominal")
     public void testTrancheImposition( int revenuNet, String situationFamiliale, int nbEnfantsACharge,
                                 int nbEnfantsSituationHandicap, boolean parentIsole, int impotAttendu) {
 
@@ -130,22 +134,6 @@ public class TestsSimulateur {
     }
 
 
-    public static Stream<Arguments> donneesRobustesse() {
-        return Stream.of(
-                Arguments.of(-1, 0,"CELIBATAIRE", 0, 0, false), // 0%
-                Arguments.of(20000,0, null , 0, 0, false), // 11%
-                Arguments.of(35000,0, "CELIBATAIRE", -1, 0, false ), // 30%
-                Arguments.of(95000,0, "CELIBATAIRE", 0, -1, false), // 41%
-                Arguments.of(200000,0, "CELIBATAIRE", 3, 4, false),
-                Arguments.of(200000,0, "MARIE", 3, 2, true),
-                Arguments.of(200000,0, "PACSE", 3, 2, true),
-                Arguments.of(200000,0, "MARIE", 8, 0, false),
-                Arguments.of(200000,10000, "CELIBATAIRE", 8, 0, false),
-                Arguments.of(200000,10000, "VEUF", 8, 0, false),
-                Arguments.of(200000,10000, "DIVORCE", 8, 0, false)
-        );
-    }
-
     public static Stream<Arguments> donneesPlafonnementQuotientFamilial() {
         return Stream.of(
                 Arguments.of(30000, 35000, "MARIE", 3, 0, false, 1466),
@@ -157,6 +145,7 @@ public class TestsSimulateur {
     @DisplayName("Tests du plafonnement du gain lié au quotient familial")
     @ParameterizedTest(name = "Foyer {2} avec rev1={0}€, rev2={1}€, {3} enfants => impôt avant décote attendu = {6}€")
     @MethodSource("donneesPlafonnementQuotientFamilial")
+    @Tag("Nominal")
     public void testPlafondQuotientFamilial(int revenuNetDeclarant1, int revenuNetDeclarant2,
                                             String situationFamiliale, int nbEnfantsACharge,
                                             int nbEnfantsSituationHandicap, boolean parentIsole,
@@ -178,16 +167,9 @@ public class TestsSimulateur {
 
     public static Stream<Arguments> donneesDecote() {
         return Stream.of(
-                // Cas A : célibataire avec impôt sous seuil 1929 - décote = 873 - 0.4525*738
                 Arguments.of(20000, 0, "CELIBATAIRE", 0, 0, false, 539),
-
-                // Cas B : couple avec impôt sous seuil 3191 - décote = 1444 - 0.4525*1475
                 Arguments.of(20000, 20000, "MARIE", 0, 0, false, 777),
-
-                // Cas C : célibataire avec impôt au-dessus du seuil - pas de décote
                 Arguments.of(35000, 0, "CELIBATAIRE", 0, 0, false, 0),
-
-                // Cas D : décote plafonnée à l'impôt (decote calculée > impôt)
                 Arguments.of(14000, 14000, "MARIE", 0, 0, false, 287)
         );
     }
@@ -196,6 +178,7 @@ public class TestsSimulateur {
     @DisplayName("Tests du calcul de la décote pour les foyers modestes")
     @ParameterizedTest(name = "rev1={0}€, rev2={1}€, {2} => décote attendue = {6}€")
     @MethodSource("donneesDecote")
+    @Tag("Nominal")
     public void testDecote(int revenuNetDeclarant1, int revenuNetDeclarant2,
                            String situationFamiliale, int nbEnfantsACharge,
                            int nbEnfantsSituationHandicap, boolean parentIsole,
@@ -215,11 +198,63 @@ public class TestsSimulateur {
         assertEquals(decoteAttendue, simulateur.getDecote());
     }
 
+    public static Stream<Arguments> donneesContributionExceptionnelle() {
+        return Stream.of(
+                Arguments.of(35000, 0, "CELIBATAIRE", 0, 0, false, 0),
+                Arguments.of(564171, 0, "CELIBATAIRE", 0, 0, false, 9500),
+                Arguments.of(500000, 478342, "MARIE", 0, 0, false, 13500),
+                Arguments.of(1500000, 0, "CELIBATAIRE", 0, 0, false, 46933)
+        );
+    }
+
+    // COUVERTURE EXIGENCE : EXG_IMPOT_07
+    @DisplayName("Tests de la contribution exceptionnelle sur les hauts revenus")
+    @ParameterizedTest(name = "rev1={0}€, rev2={1}€, {2} => CEHR attendue = {6}€")
+    @MethodSource("donneesContributionExceptionnelle")
+    @Tag("Nominal")
+    public void testContributionExceptionnelle(int revenuNetDeclarant1, int revenuNetDeclarant2,
+                                               String situationFamiliale, int nbEnfantsACharge,
+                                               int nbEnfantsSituationHandicap, boolean parentIsole,
+                                               int cehrAttendue) {
+        // Arrange
+        simulateur.setRevenusNetDeclarant1(revenuNetDeclarant1);
+        simulateur.setRevenusNetDeclarant2(revenuNetDeclarant2);
+        simulateur.setSituationFamiliale(SituationFamiliale.valueOf(situationFamiliale));
+        simulateur.setNbEnfantsACharge(nbEnfantsACharge);
+        simulateur.setNbEnfantsSituationHandicap(nbEnfantsSituationHandicap);
+        simulateur.setParentIsole(parentIsole);
+
+        // Act
+        simulateur.calculImpotSurRevenuNet();
+
+        // Assert
+        // Note : getContribExceptionnelle() retourne un double, on caste en int pour comparaison
+        assertEquals(cehrAttendue, (int) simulateur.getContribExceptionnelle());
+    }
+
+    public static Stream<Arguments> donneesRobustesse() {
+        return Stream.of(
+                Arguments.of(-1, 0,"CELIBATAIRE", 0, 0, false), // 0%
+                Arguments.of(20000,0, null , 0, 0, false), // 11%
+                Arguments.of(35000,0, "CELIBATAIRE", -1, 0, false ), // 30%
+                Arguments.of(95000,0, "CELIBATAIRE", 0, -1, false), // 41%
+                Arguments.of(200000,0, "CELIBATAIRE", 3, 4, false),
+                Arguments.of(200000,0, "MARIE", 3, 2, true),
+                Arguments.of(200000,0, "PACSE", 3, 2, true),
+                Arguments.of(200000,0, "MARIE", 8, 0, false),
+                Arguments.of(200000,10000, "CELIBATAIRE", 8, 0, false),
+                Arguments.of(200000,10000, "VEUF", 8, 0, false),
+                Arguments.of(200000,10000, "DIVORCE", 8, 0, false),
+                Arguments.of(20000, -1, "MARIE", 0, 0, false)
+        );
+    }
+
     // COUVERTURE EXIGENCE : Robustesse
     @DisplayName("Tests de robustesse avec des valeurs interdites")
 
     @ParameterizedTest( name ="Test avec revenuNetDeclarant1={0}, revenuDeclarant2={1}, situationFamiliale={2}, nbEnfantsACharge={3}, nbEnfantsSituationHandicap={4}, parentIsole={5}")
     @MethodSource( "donneesRobustesse" )
+    @Tag("Negative")
     public void testRobustesse( int revenuNetDeclarant1, int revenuNetDeclarant2 , String situationFamiliale, int nbEnfantsACharge,
                                        int nbEnfantsSituationHandicap, boolean parentIsole) {
 
@@ -245,6 +280,7 @@ public class TestsSimulateur {
     @DisplayName("Tests supplémentaires de cas variés de foyers fiscaux - ")
     @ParameterizedTest( name = " avec revenuNetDeclarant1={0}, revenuNetDeclarant2={1}, situationFamiliale={2}, nbEnfantsACharge={3}, nbEnfantsSituationHandicap={4}, parentIsole={5} - IMPOT NET ATTENDU = {6}")
     @CsvFileSource( resources={"/datasImposition.csv"} , numLinesToSkip = 1 )
+    @Tag("Nominal")
     public void testCasImposition( int revenuNetDeclarant1, int revenuNetDeclarant2,  String situationFamiliale, int nbEnfantsACharge,
                                        int nbEnfantsSituationHandicap, boolean parentIsole, int impotAttendu) {
 
