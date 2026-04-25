@@ -176,6 +176,45 @@ public class TestsSimulateur {
         assertEquals(impotAvantDecoteAttendu, simulateur.getImpotAvantDecote());
     }
 
+    public static Stream<Arguments> donneesDecote() {
+        return Stream.of(
+                // Cas A : célibataire avec impôt sous seuil 1929 - décote = 873 - 0.4525*738
+                Arguments.of(20000, 0, "CELIBATAIRE", 0, 0, false, 539),
+
+                // Cas B : couple avec impôt sous seuil 3191 - décote = 1444 - 0.4525*1475
+                Arguments.of(20000, 20000, "MARIE", 0, 0, false, 777),
+
+                // Cas C : célibataire avec impôt au-dessus du seuil - pas de décote
+                Arguments.of(35000, 0, "CELIBATAIRE", 0, 0, false, 0),
+
+                // Cas D : décote plafonnée à l'impôt (decote calculée > impôt)
+                Arguments.of(14000, 14000, "MARIE", 0, 0, false, 287)
+        );
+    }
+
+    // COUVERTURE EXIGENCE : EXG_IMPOT_06
+    @DisplayName("Tests du calcul de la décote pour les foyers modestes")
+    @ParameterizedTest(name = "rev1={0}€, rev2={1}€, {2} => décote attendue = {6}€")
+    @MethodSource("donneesDecote")
+    public void testDecote(int revenuNetDeclarant1, int revenuNetDeclarant2,
+                           String situationFamiliale, int nbEnfantsACharge,
+                           int nbEnfantsSituationHandicap, boolean parentIsole,
+                           int decoteAttendue) {
+        // Arrange
+        simulateur.setRevenusNetDeclarant1(revenuNetDeclarant1);
+        simulateur.setRevenusNetDeclarant2(revenuNetDeclarant2);
+        simulateur.setSituationFamiliale(SituationFamiliale.valueOf(situationFamiliale));
+        simulateur.setNbEnfantsACharge(nbEnfantsACharge);
+        simulateur.setNbEnfantsSituationHandicap(nbEnfantsSituationHandicap);
+        simulateur.setParentIsole(parentIsole);
+
+        // Act
+        simulateur.calculImpotSurRevenuNet();
+
+        // Assert
+        assertEquals(decoteAttendue, simulateur.getDecote());
+    }
+
     // COUVERTURE EXIGENCE : Robustesse
     @DisplayName("Tests de robustesse avec des valeurs interdites")
 
