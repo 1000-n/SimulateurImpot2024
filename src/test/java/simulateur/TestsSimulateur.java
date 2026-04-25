@@ -39,40 +39,8 @@ public class TestsSimulateur {
 
     }
 
-    // COUVERTURE EXIGENCE : EXG_IMPOT_03
-    @DisplayName("Tests du calcul des parts pour différents foyers fiscaux")
-    @ParameterizedTest
-    @MethodSource( "donneesPartsFoyerFiscal" )
-    public void testNombreDeParts( int revenuNetDeclarant1, String situationFamiliale, int nbEnfantsACharge,
-                                   int nbEnfantsSituationHandicap, boolean parentIsole, double nbPartsAttendu) {
 
-        // Arrange
-        simulateur.setRevenusNetDeclarant1( revenuNetDeclarant1 );
-        simulateur.setRevenusNetDeclarant2( 0);
-        simulateur.setSituationFamiliale( SituationFamiliale.valueOf(situationFamiliale) );
-        simulateur.setNbEnfantsACharge( nbEnfantsACharge );
-        simulateur.setNbEnfantsSituationHandicap( nbEnfantsSituationHandicap );
-        simulateur.setParentIsole( parentIsole );
-
-        // Act
-        simulateur.calculImpotSurRevenuNet();
-
-        // Assert
-        assertEquals(   nbPartsAttendu, simulateur.getNbPartsFoyerFiscal());
-
-    }
-
-
-    public static Stream<Arguments> donneesAbattementFoyerFiscal() {
-        return Stream.of(
-                Arguments.of(4900, "CELIBATAIRE", 0, 0, false, 495), // < 495 => 495
-                Arguments.of(12000, "CELIBATAIRE", 0, 0, false, 1200), // 10 %
-                Arguments.of(200000, "CELIBATAIRE", 0, 0, false, 14171) // > 14171 => 14171
-        );
-
-    }
-
-    // COUVERTURE EXIGENCE : EXG_IMPOT_03
+    // COUVERTURE EXIGENCE : EXG_IMPOT_02
     @DisplayName("Tests des abattements pour les foyers fiscaux")
     @ParameterizedTest
     @MethodSource( "donneesAbattementFoyerFiscal" )
@@ -106,6 +74,39 @@ public class TestsSimulateur {
 
     }
 
+    // COUVERTURE EXIGENCE : EXG_IMPOT_03
+    @DisplayName("Tests du calcul des parts pour différents foyers fiscaux")
+    @ParameterizedTest
+    @MethodSource( "donneesPartsFoyerFiscal" )
+    public void testNombreDeParts( int revenuNetDeclarant1, String situationFamiliale, int nbEnfantsACharge,
+                                   int nbEnfantsSituationHandicap, boolean parentIsole, double nbPartsAttendu) {
+
+        // Arrange
+        simulateur.setRevenusNetDeclarant1( revenuNetDeclarant1 );
+        simulateur.setRevenusNetDeclarant2( 0);
+        simulateur.setSituationFamiliale( SituationFamiliale.valueOf(situationFamiliale) );
+        simulateur.setNbEnfantsACharge( nbEnfantsACharge );
+        simulateur.setNbEnfantsSituationHandicap( nbEnfantsSituationHandicap );
+        simulateur.setParentIsole( parentIsole );
+
+        // Act
+        simulateur.calculImpotSurRevenuNet();
+
+        // Assert
+        assertEquals(   nbPartsAttendu, simulateur.getNbPartsFoyerFiscal());
+
+    }
+
+
+    public static Stream<Arguments> donneesAbattementFoyerFiscal() {
+        return Stream.of(
+                Arguments.of(4900, "CELIBATAIRE", 0, 0, false, 495), // < 495 => 495
+                Arguments.of(12000, "CELIBATAIRE", 0, 0, false, 1200), // 10 %
+                Arguments.of(200000, "CELIBATAIRE", 0, 0, false, 14171) // > 14171 => 14171
+        );
+
+    }
+
     // COUVERTURE EXIGENCE : EXG_IMPOT_04
     @DisplayName("Tests des différents taux marginaux d'imposition")
     @ParameterizedTest
@@ -129,14 +130,13 @@ public class TestsSimulateur {
     }
 
 
-
     public static Stream<Arguments> donneesRobustesse() {
         return Stream.of(
                 Arguments.of(-1, 0,"CELIBATAIRE", 0, 0, false), // 0%
                 Arguments.of(20000,0, null , 0, 0, false), // 11%
                 Arguments.of(35000,0, "CELIBATAIRE", -1, 0, false ), // 30%
                 Arguments.of(95000,0, "CELIBATAIRE", 0, -1, false), // 41%
-                Arguments.of(200000,0, "CELIBATAIRE", 3, 4, false, 60768),
+                Arguments.of(200000,0, "CELIBATAIRE", 3, 4, false),
                 Arguments.of(200000,0, "MARIE", 3, 2, true),
                 Arguments.of(200000,0, "PACSE", 3, 2, true),
                 Arguments.of(200000,0, "MARIE", 8, 0, false),
@@ -144,6 +144,36 @@ public class TestsSimulateur {
                 Arguments.of(200000,10000, "VEUF", 8, 0, false),
                 Arguments.of(200000,10000, "DIVORCE", 8, 0, false)
         );
+    }
+
+    public static Stream<Arguments> donneesPlafonnementQuotientFamilial() {
+        return Stream.of(
+                Arguments.of(30000, 35000, "MARIE", 3, 0, false, 1466),
+                Arguments.of(200000, 0, "MARIE", 3, 0, false, 37408)
+        );
+    }
+
+    // COUVERTURE EXIGENCE : EXG_IMPOT_05
+    @DisplayName("Tests du plafonnement du gain lié au quotient familial")
+    @ParameterizedTest(name = "Foyer {2} avec rev1={0}€, rev2={1}€, {3} enfants => impôt avant décote attendu = {6}€")
+    @MethodSource("donneesPlafonnementQuotientFamilial")
+    public void testPlafondQuotientFamilial(int revenuNetDeclarant1, int revenuNetDeclarant2,
+                                            String situationFamiliale, int nbEnfantsACharge,
+                                            int nbEnfantsSituationHandicap, boolean parentIsole,
+                                            int impotAvantDecoteAttendu) {
+        // Arrange
+        simulateur.setRevenusNetDeclarant1(revenuNetDeclarant1);
+        simulateur.setRevenusNetDeclarant2(revenuNetDeclarant2);
+        simulateur.setSituationFamiliale(SituationFamiliale.valueOf(situationFamiliale));
+        simulateur.setNbEnfantsACharge(nbEnfantsACharge);
+        simulateur.setNbEnfantsSituationHandicap(nbEnfantsSituationHandicap);
+        simulateur.setParentIsole(parentIsole);
+
+        // Act
+        simulateur.calculImpotSurRevenuNet();
+
+        // Assert
+        assertEquals(impotAvantDecoteAttendu, simulateur.getImpotAvantDecote());
     }
 
     // COUVERTURE EXIGENCE : Robustesse
