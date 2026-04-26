@@ -184,55 +184,12 @@ public class SimulateurReusine {
         System.out.println( "Revenu fiscal de référence : " + rFRef );
 
 
-        // parts déclarants
-        // EXIG  : EXG_IMPOT_03
-        switch ( sitFam ) {
-            case CELIBATAIRE:
-                nbPtsDecl = 1;
-                break;
-            case MARIE:
-                nbPtsDecl = 2;
-                break;
-            case DIVORCE:
-                nbPtsDecl = 1;
-                break;
-            case VEUF:
-                nbPtsDecl = 1;
-                break;
-            case PACSE:
-                nbPtsDecl = 2;
-                break;
-        }
+    // Parts fiscales
+    // EXIGENCE : EXG_IMPOT_03
+        CalculateurParts calculateurParts = new CalculateurParts();
+        nbPtsDecl = calculateurParts.calculerPartsDeclarants(sitFam);
+        nbPts = calculateurParts.calculerPartsFoyer(sitFam, nbEnf, nbEnfH, parIso);
 
-        System.out.println( "Nombre d'enfants  : " + nbEnf );
-        System.out.println( "Nombre d'enfants handicapés : " + nbEnfH );
-
-        // parts enfants à charge
-        if ( nbEnf <= 2 ) {
-            nbPts = nbPtsDecl + nbEnf * 0.5;
-        } else if ( nbEnf > 2 ) {
-            nbPts = nbPtsDecl+  1.0 + ( nbEnf - 2 );
-        }
-
-        // parent isolé
-
-        System.out.println( "Parent isolé : " + parIso );
-
-        if ( parIso ) {
-            if ( nbEnf > 0 ){
-                nbPts = nbPts + 0.5;
-            }
-        }
-
-        // Veuf avec enfant
-        if ( sitFam == SituationFamiliale.VEUF && nbEnf > 0 ) {
-            nbPts = nbPts + 1;
-        }
-
-        // enfant handicapé
-        nbPts = nbPts + nbEnfH * 0.5;
-
-        System.out.println( "Nombre de parts : " + nbPts );
 
         // EXIGENCE : EXG_IMPOT_07:
         // Contribution exceptionnelle sur les hauts revenus
