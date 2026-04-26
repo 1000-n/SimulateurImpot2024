@@ -19,18 +19,6 @@ public class SimulateurReusine {
     /** Plafond du gain d'impôt apporté par chaque demi-part supplémentaire (en euros). */
     private static final double PLAFOND_DEMI_PART = 1759;
 
-    // ===== Constantes EXG_IMPOT_06 : décote pour les foyers modestes =====
-    /** Seuil d'impôt en deçà duquel la décote s'applique pour un déclarant seul. */
-    private static final double SEUIL_DECOTE_DECLARANT_SEUL = 1929;
-    /** Seuil d'impôt en deçà duquel la décote s'applique pour un couple. */
-    private static final double SEUIL_DECOTE_DECLARANT_COUPLE = 3191;
-    /** Décote maximale pour un déclarant seul (en euros). */
-    private static final double DECOTE_MAX_DECLARANT_SEUL = 873;
-    /** Décote maximale pour un couple (en euros). */
-    private static final double DECOTE_MAX_DECLARANT_COUPLE = 1444;
-    /** Taux appliqué à l'impôt dans le calcul de la décote. */
-    private static final double TAUX_DECOTE = 0.4525;
-
     // ===== Constantes EXG_IMPOT_07 : contribution exceptionnelle sur les hauts revenus =====
     /** Limites des tranches de la CEHR (en euros). 5 valeurs pour 4 tranches. */
     private static final int[] LIMITES_TRANCHES_CEHR = {
@@ -245,24 +233,7 @@ public class SimulateurReusine {
 
         // Calcul de la decote
         // EXIGENCE : EXG_IMPOT_06
-
-        decote = 0;
-        // decote
-        if ( nbPtsDecl == 1 ) {
-            if ( mImp < SEUIL_DECOTE_DECLARANT_SEUL ) {
-                decote = DECOTE_MAX_DECLARANT_SEUL - ( mImp  * TAUX_DECOTE );
-            }
-        }
-        if (  nbPtsDecl == 2 ) {
-            if ( mImp < SEUIL_DECOTE_DECLARANT_COUPLE ) {
-                decote =  DECOTE_MAX_DECLARANT_COUPLE - ( mImp  * TAUX_DECOTE  );
-            }
-        }
-        decote = Math.round( decote );
-
-        if ( mImp <= decote ) {
-            decote = mImp;
-        }
+        decote = new CalculateurDecote().calculer(mImp, nbPtsDecl);
 
         System.out.println( "Decote : " + decote );
 
