@@ -19,20 +19,6 @@ public class SimulateurReusine {
     /** Plafond du gain d'impôt apporté par chaque demi-part supplémentaire (en euros). */
     private static final double PLAFOND_DEMI_PART = 1759;
 
-    // ===== Constantes EXG_IMPOT_07 : contribution exceptionnelle sur les hauts revenus =====
-    /** Limites des tranches de la CEHR (en euros). 5 valeurs pour 4 tranches. */
-    private static final int[] LIMITES_TRANCHES_CEHR = {
-            0, 250000, 500000, 1000000, Integer.MAX_VALUE
-    };
-    /** Taux de la CEHR pour une personne seule (célibataire, divorcé, veuf). */
-    private static final double[] TAUX_CEHR_CELIBATAIRE = {
-            0.0, 0.03, 0.04, 0.04
-    };
-    /** Taux de la CEHR pour un couple (marié, pacsé). */
-    private static final double[] TAUX_CEHR_COUPLE = {
-            0.0, 0.0, 0.03, 0.04
-    };
-
     // revenu net
     private int rNetDecl1 = 0;
     private int rNetDecl2 = 0;
@@ -181,17 +167,15 @@ public class SimulateurReusine {
 
         // EXIGENCE : EXG_IMPOT_07
         // Contribution exceptionnelle sur les hauts revenus
-        CalculateurImpotProgressif calculateurImpotProgressif = new CalculateurImpotProgressif();
-        double[] tauxCEHR = (nbPtsDecl == 1) ? TAUX_CEHR_CELIBATAIRE : TAUX_CEHR_COUPLE;
-        contribExceptionnelle = Math.round(
-                calculateurImpotProgressif.calculer(rFRef, LIMITES_TRANCHES_CEHR, tauxCEHR)
-        );
+        contribExceptionnelle = new CalculateurContributionExceptionnelle()
+                .calculer(rFRef, nbPtsDecl);
 
         System.out.println( "Contribution exceptionnelle sur les hauts revenus : " + contribExceptionnelle );
 
         // Calcul impôt des declarants
         // EXIGENCE : EXG_IMPOT_04
         rImposable = rFRef / nbPtsDecl;
+        CalculateurImpotProgressif calculateurImpotProgressif = new CalculateurImpotProgressif();
         mImpDecl = Math.round(
                 calculateurImpotProgressif.calculer(rImposable, LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
                         * nbPtsDecl
