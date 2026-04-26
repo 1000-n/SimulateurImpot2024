@@ -1,0 +1,12 @@
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/AdaptateurSimulateur.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/ICalculateurImpot.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/Simulateur.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/SituationFamiliale.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/AdaptateurSimulateurReusine.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurAbattement.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurContributionExceptionnelle.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurDecote.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurImpotProgressif.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurParts.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurPlafonnement.java
+/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/SimulateurReusine.java

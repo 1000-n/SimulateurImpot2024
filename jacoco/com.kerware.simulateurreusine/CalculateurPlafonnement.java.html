@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculateurPlafonnement.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculateurPlafonnement.java</span></div><h1>CalculateurPlafonnement.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+/**
+ * Calculateur du plafonnement du gain lié au quotient familial.
+ *
+ * Implémente l'exigence EXG_IMPOT_05 :
+ *  - Le quotient familial (parts apportées par les enfants/situations particulières)
+ *    permet de réduire l'impôt
+ *  - Cette réduction est cependant plafonnée à un montant fixe par demi-part supplémentaire
+ *  - Si le gain réel dépasse ce plafond, on applique la limite au lieu du gain réel
+ */
+<span class="fc" id="L12">public final class CalculateurPlafonnement {</span>
+
+    /** Plafond du gain d'impôt apporté par chaque demi-part supplémentaire (en euros). */
+    private static final double PLAFOND_DEMI_PART = 1759;
+    /** Une demi-part = 0.5 part. */
+    private static final double VALEUR_DEMI_PART = 0.5;
+
+    /**
+     * Applique le plafonnement à l'impôt du foyer si le gain dépasse le plafond légal.
+     *
+     * @param impotDeclarants    impôt calculé sur les seules parts des déclarants
+     * @param impotFoyer         impôt calculé sur le nombre total de parts du foyer
+     * @param nbPartsDeclarants  nombre de parts des déclarants seuls
+     * @param nbPartsFoyer       nombre total de parts du foyer
+     * @return l'impôt du foyer après application éventuelle du plafonnement
+     */
+    public double appliquerPlafonnement(double impotDeclarants, double impotFoyer,
+                                        double nbPartsDeclarants, double nbPartsFoyer) {
+<span class="fc" id="L30">        double gainReel = impotDeclarants - impotFoyer;</span>
+<span class="fc" id="L31">        double plafond = calculerPlafond(nbPartsDeclarants, nbPartsFoyer);</span>
+
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (gainReel &gt;= plafond) {</span>
+<span class="fc" id="L34">            return impotDeclarants - plafond;</span>
+        }
+<span class="fc" id="L36">        return impotFoyer;</span>
+    }
+
+    /**
+     * Calcule le plafond de gain autorisé selon le nombre de demi-parts supplémentaires.
+     */
+    private double calculerPlafond(double nbPartsDeclarants, double nbPartsFoyer) {
+<span class="fc" id="L43">        double ecartParts = nbPartsFoyer - nbPartsDeclarants;</span>
+<span class="fc" id="L44">        double nbDemiParts = ecartParts / VALEUR_DEMI_PART;</span>
+<span class="fc" id="L45">        return nbDemiParts * PLAFOND_DEMI_PART;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

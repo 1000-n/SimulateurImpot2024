@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdaptateurSimulateurReusine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">AdaptateurSimulateurReusine.java</span></div><h1>AdaptateurSimulateurReusine.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+import com.kerware.simulateur.ICalculateurImpot;
+import com.kerware.simulateur.SituationFamiliale;
+
+<span class="fc" id="L6">public final class AdaptateurSimulateurReusine implements ICalculateurImpot {</span>
+
+<span class="fc" id="L8">    private SimulateurReusine simulateur = new SimulateurReusine();</span>
+
+<span class="fc" id="L10">    private int revenusNetDecl1 = 0;</span>
+<span class="fc" id="L11">    private int revenusNetDecl2 = 0;</span>
+    private SituationFamiliale situationFamiliale;
+    private int nbEnfantsACharge;
+    private int nbEnfantsSituationHandicap;
+    private boolean parentIsole;
+
+    @Override
+    public void setRevenusNetDeclarant1(int rn) {
+<span class="fc" id="L19">        this.revenusNetDecl1 = rn;</span>
+<span class="fc" id="L20">    }</span>
+
+    @Override
+    public void setRevenusNetDeclarant2(int rn) {
+<span class="fc" id="L24">        this.revenusNetDecl2 = rn;</span>
+<span class="fc" id="L25">    }</span>
+
+    @Override
+    public void setSituationFamiliale(SituationFamiliale sf) {
+<span class="fc" id="L29">        this.situationFamiliale = sf;</span>
+<span class="fc" id="L30">    }</span>
+
+    @Override
+    public void setNbEnfantsACharge(int nbe) {
+<span class="fc" id="L34">        this.nbEnfantsACharge = nbe;</span>
+<span class="fc" id="L35">    }</span>
+
+    @Override
+    public void setNbEnfantsSituationHandicap(int nbesh) {
+<span class="fc" id="L39">        this.nbEnfantsSituationHandicap = nbesh;</span>
+<span class="fc" id="L40">    }</span>
+
+    @Override
+    public void setParentIsole(boolean pi) {
+<span class="fc" id="L44">        this.parentIsole = pi;</span>
+<span class="fc" id="L45">    }</span>
+
+    @Override
+    public void calculImpotSurRevenuNet() {
+<span class="fc" id="L49">        simulateur.calculImpot(revenusNetDecl1, revenusNetDecl2, situationFamiliale,</span>
+                nbEnfantsACharge, nbEnfantsSituationHandicap, parentIsole);
+<span class="fc" id="L51">    }</span>
+
+    @Override
+    public int getRevenuNetDeclatant1() {
+<span class="nc" id="L55">        return revenusNetDecl1;</span>
+    }
+
+    @Override
+    public int getRevenuNetDeclatant2() {
+<span class="nc" id="L60">        return revenusNetDecl2;</span>
+    }
+
+    @Override
+    public double getContribExceptionnelle() {
+<span class="fc" id="L65">        return simulateur.getContribExceptionnelle();</span>
+    }
+
+    @Override
+    public int getRevenuFiscalReference() {
+<span class="nc" id="L70">        return (int) simulateur.getRevenuReference();</span>
+    }
+
+    @Override
+    public int getAbattement() {
+<span class="fc" id="L75">        return (int) simulateur.getAbattement();</span>
+    }
+
+    @Override
+    public double getNbPartsFoyerFiscal() {
+<span class="fc" id="L80">        return simulateur.getNbParts();</span>
+    }
+
+    @Override
+    public int getImpotAvantDecote() {
+<span class="fc" id="L85">        return (int) simulateur.getImpotAvantDecote();</span>
+    }
+
+    @Override
+    public int getDecote() {
+<span class="fc" id="L90">        return (int) simulateur.getDecote();</span>
+    }
+
+    @Override
+    public int getImpotSurRevenuNet() {
+<span class="fc" id="L95">        return (int) simulateur.getImpotNet();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

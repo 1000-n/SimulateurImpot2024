@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculateurAbattement.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculateurAbattement.java</span></div><h1>CalculateurAbattement.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+import com.kerware.simulateur.SituationFamiliale;
+
+/**
+ * Calculateur d'abattement sur les revenus nets déclarés.
+ *
+ * Implémente l'exigence EXG_IMPOT_02 :
+ *  - taux de 10% appliqué SEPAREMENT à chaque déclarant
+ *  - plafonné à PLAFOND_ABATTEMENT par déclarant
+ *  - minimum MINIMUM_ABATTEMENT par déclarant
+ *  - l'abattement du foyer est la somme des deux abattements individuels
+ */
+<span class="fc" id="L14">public final class CalculateurAbattement {</span>
+
+    /** Plafond annuel de l'abattement par déclarant en 2024 (en euros). */
+    private static final int PLAFOND_ABATTEMENT = 14171;
+    /** Minimum annuel de l'abattement par déclarant en 2024 (en euros). */
+    private static final int MINIMUM_ABATTEMENT = 495;
+    /** Taux de l'abattement appliqué aux revenus nets déclarés (10%). */
+    private static final double TAUX_ABATTEMENT = 0.1;
+
+    /**
+     * Calcule l'abattement total du foyer fiscal.
+     *
+     * @param revenuNetDeclarant1  revenu net du déclarant 1
+     * @param revenuNetDeclarant2  revenu net du déclarant 2 (0 si déclarant unique)
+     * @param situationFamiliale   situation familiale du foyer
+     * @return l'abattement total du foyer
+     */
+    public long calculer(int revenuNetDeclarant1, int revenuNetDeclarant2,
+                         SituationFamiliale situationFamiliale) {
+<span class="fc" id="L33">        long abattementDeclarant1 = calculerAbattementIndividuel(revenuNetDeclarant1);</span>
+<span class="fc" id="L34">        long abattementDeclarant2 = 0;</span>
+
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (estCouple(situationFamiliale)) {</span>
+<span class="fc" id="L37">            abattementDeclarant2 = calculerAbattementIndividuel(revenuNetDeclarant2);</span>
+        }
+
+<span class="fc" id="L40">        return abattementDeclarant1 + abattementDeclarant2;</span>
+    }
+
+    /**
+     * Calcule l'abattement individuel pour un déclarant en appliquant
+     * le taux puis les bornes (min et max).
+     */
+    private long calculerAbattementIndividuel(int revenuNet) {
+<span class="fc" id="L48">        long abattement = Math.round(revenuNet * TAUX_ABATTEMENT);</span>
+<span class="fc bfc" id="L49" title="All 2 branches covered.">        if (abattement &gt; PLAFOND_ABATTEMENT) {</span>
+<span class="fc" id="L50">            abattement = PLAFOND_ABATTEMENT;</span>
+        }
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        if (abattement &lt; MINIMUM_ABATTEMENT) {</span>
+<span class="fc" id="L53">            abattement = MINIMUM_ABATTEMENT;</span>
+        }
+<span class="fc" id="L55">        return abattement;</span>
+    }
+
+    private boolean estCouple(SituationFamiliale situationFamiliale) {
+<span class="fc bfc" id="L59" title="All 4 branches covered.">        return situationFamiliale == SituationFamiliale.MARIE</span>
+                || situationFamiliale == SituationFamiliale.PACSE;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

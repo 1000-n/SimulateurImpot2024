@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<checkstyle version="9.3">
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurImpotProgressif.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurDecote.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurParts.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurContributionExceptionnelle.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/AdaptateurSimulateurReusine.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurPlafonnement.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/SimulateurReusine.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateurreusine/CalculateurAbattement.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/SituationFamiliale.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/ICalculateurImpot.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/AdaptateurSimulateur.java">
+</file>
+<file name="/Users/milene/Dev/IUT/SimulateurImpot2024/src/main/java/com/kerware/simulateur/Simulateur.java">
+<error line="29" column="23" severity="warning" message="&apos;11294&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="30" column="23" severity="warning" message="&apos;28797&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="31" column="23" severity="warning" message="&apos;82341&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="32" column="23" severity="warning" message="&apos;177106&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="35" column="37" severity="warning" message="&apos;6&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="39" column="26" severity="warning" message="&apos;0.11&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="40" column="26" severity="warning" message="&apos;0.3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="41" column="26" severity="warning" message="&apos;0.41&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="42" column="26" severity="warning" message="&apos;0.45&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="44" column="40" severity="warning" message="&apos;5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="48" column="25" severity="warning" message="&apos;250000&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="49" column="25" severity="warning" message="&apos;500000&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="50" column="25" severity="warning" message="&apos;1000000&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="53" column="41" severity="warning" message="&apos;5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="57" column="28" severity="warning" message="&apos;0.03&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="58" column="28" severity="warning" message="&apos;0.04&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="59" column="28" severity="warning" message="&apos;0.04&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="61" column="55" severity="warning" message="&apos;4&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="66" column="29" severity="warning" message="&apos;0.03&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="67" column="29" severity="warning" message="&apos;0.04&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="69" column="50" severity="warning" message="&apos;4&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="72" column="28" severity="warning" message="&apos;14171&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="73" column="28" severity="warning" message="&apos;495&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="74" column="27" severity="warning" message="&apos;0.1&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="77" column="35" severity="warning" message="&apos;1759&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="79" column="47" severity="warning" message="&apos;1929&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="80" column="52" severity="warning" message="&apos;3191&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="82" column="45" severity="warning" message="&apos;873&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="83" column="47" severity="warning" message="&apos;1444&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="84" column="33" severity="warning" message="&apos;0.4525&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="122" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getRevenuReference&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getRevenuReference&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="126" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getDecote&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getDecote&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="131" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getAbattement&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getAbattement&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="135" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getNbParts&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getNbParts&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="139" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getImpotAvantDecote&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getImpotAvantDecote&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="143" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getImpotNet&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getImpotNet&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="147" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getRevenuNetDeclatant1&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getRevenuNetDeclatant1&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="151" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getRevenuNetDeclatant2&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getRevenuNetDeclatant2&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="155" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;getContribExceptionnelle&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;getContribExceptionnelle&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="162" severity="warning" message="Line is longer than 100 characters (found 150)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="162" column="5" severity="warning" message="Class &apos;Simulateur&apos; looks like designed for extension (can be subclassed), but the method &apos;calculImpot&apos; does not have javadoc that explains how to do that safely. If class is not designed for extension consider making the class &apos;Simulateur&apos; final or making the method &apos;calculImpot&apos; static/final/abstract/empty, or adding allowed annotation for the method." source="com.puppycrawl.tools.checkstyle.checks.design.DesignForExtensionCheck"/>
+<error line="162" column="5" severity="warning" message="Cyclomatic Complexity is 52 (max allowed is 15)." source="com.puppycrawl.tools.checkstyle.checks.metrics.CyclomaticComplexityCheck"/>
+<error line="162" column="5" severity="warning" message="Method calculImpot length is 286 lines (max allowed is 50)." source="com.puppycrawl.tools.checkstyle.checks.sizes.MethodLengthCheck"/>
+<error line="174" severity="warning" message="Line is longer than 100 characters (found 106)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="182" severity="warning" message="Line is longer than 100 characters (found 128)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="185" column="26" severity="warning" message="&apos;7&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="186" severity="warning" message="Line is longer than 100 characters (found 101)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="189" severity="warning" message="Line is longer than 100 characters (found 107)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="193" severity="warning" message="Line is longer than 100 characters (found 141)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="195" severity="warning" message="Line is longer than 100 characters (found 136)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="210" column="17" severity="warning" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="211" column="17" severity="warning" message="&apos;4&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="212" column="17" severity="warning" message="&apos;5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="217" column="14" severity="warning" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="218" column="14" severity="warning" message="&apos;4&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="223" column="21" severity="warning" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="224" column="21" severity="warning" message="&apos;4&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="229" column="29" severity="warning" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="234" column="24" severity="warning" message="&apos;3&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="278" column="9" severity="warning" message="switch without &quot;default&quot; clause." source="com.puppycrawl.tools.checkstyle.checks.coding.MissingSwitchDefaultCheck"/>
+<error line="301" column="41" severity="warning" message="&apos;0.5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="312" column="33" severity="warning" message="&apos;0.5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="322" column="34" severity="warning" message="&apos;0.5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="340" severity="warning" message="Line is longer than 100 characters (found 108)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="342" severity="warning" message="Line is longer than 100 characters (found 103)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="346" column="22" severity="warning" message="&apos;5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="349" severity="warning" message="Line is longer than 100 characters (found 109)." source="com.puppycrawl.tools.checkstyle.checks.sizes.LineLengthCheck"/>
+<error line="366" column="22" severity="warning" message="&apos;5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="387" column="22" severity="warning" message="&apos;5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+<error line="405" column="38" severity="warning" message="&apos;0.5&apos; is a magic number." source="com.puppycrawl.tools.checkstyle.checks.coding.MagicNumberCheck"/>
+</file>
+</checkstyle>

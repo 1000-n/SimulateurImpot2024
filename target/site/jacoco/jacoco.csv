@@ -1,0 +1,12 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+SimulateurImpot2024,com.kerware.simulateurreusine,CalculateurDecote,0,50,0,10,0,11,0,8,0,3
+SimulateurImpot2024,com.kerware.simulateurreusine,CalculateurParts,0,88,2,14,0,18,2,13,0,7
+SimulateurImpot2024,com.kerware.simulateurreusine,CalculateurContributionExceptionnelle,0,87,0,2,0,10,0,4,0,3
+SimulateurImpot2024,com.kerware.simulateurreusine,SimulateurReusine,8,334,1,31,2,58,2,27,1,12
+SimulateurImpot2024,com.kerware.simulateurreusine,CalculateurImpotProgressif,0,62,2,4,0,8,2,3,0,2
+SimulateurImpot2024,com.kerware.simulateurreusine,CalculateurPlafonnement,0,34,0,2,0,9,0,4,0,3
+SimulateurImpot2024,com.kerware.simulateurreusine,CalculateurAbattement,0,51,0,10,0,13,0,9,0,4
+SimulateurImpot2024,com.kerware.simulateurreusine,AdaptateurSimulateurReusine,11,83,0,0,3,24,3,14,3,14
+SimulateurImpot2024,com.kerware.simulateur,SituationFamiliale,0,33,0,0,0,6,0,1,0,1
+SimulateurImpot2024,com.kerware.simulateur,AdaptateurSimulateur,11,83,0,0,3,24,3,14,3,14
+SimulateurImpot2024,com.kerware.simulateur,Simulateur,14,1113,11,89,4,214,14,49,3,8

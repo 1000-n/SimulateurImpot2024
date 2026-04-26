@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculateurParts.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculateurParts.java</span></div><h1>CalculateurParts.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+import com.kerware.simulateur.SituationFamiliale;
+
+/**
+ * Calculateur du nombre de parts fiscales pour le foyer.
+ *
+ * Implémente l'exigence EXG_IMPOT_03 :
+ *  - 1 part par déclarant (2 pour un couple)
+ *  - 0,5 part pour chacun des 2 premiers enfants
+ *  - 1 part par enfant à partir du 3e
+ *  - 0,5 part supplémentaire par enfant en situation de handicap
+ *  - 0,5 part supplémentaire pour un parent isolé avec enfants
+ *  - 1 part supplémentaire pour un veuf avec enfants à charge
+ */
+<span class="fc" id="L16">public final class CalculateurParts {</span>
+
+    /** Demi-part par enfant pour les 2 premiers. */
+    private static final double DEMI_PART_PAR_ENFANT = 0.5;
+    /** Part complète par enfant à partir du 3e. */
+    private static final double PART_PAR_ENFANT_AU_DELA_DE_2 = 1.0;
+    /** Demi-part supplémentaire pour parent isolé avec enfants. */
+    private static final double DEMI_PART_PARENT_ISOLE = 0.5;
+    /** Part supplémentaire pour un veuf avec enfants. */
+    private static final double PART_SUPPLEMENTAIRE_VEUF_AVEC_ENFANT = 1.0;
+    /** Demi-part par enfant en situation de handicap. */
+    private static final double DEMI_PART_ENFANT_HANDICAPE = 0.5;
+    /** Seuil au-delà duquel les enfants comptent pour 1 part complète. */
+    private static final int SEUIL_NB_ENFANTS_PART_COMPLETE = 2;
+
+    /**
+     * Calcule le nombre de parts des déclarants seuls (sans tenir compte des enfants).
+     * Sert au calcul du plafonnement du quotient familial (EXG_IMPOT_05).
+     */
+    public double calculerPartsDeclarants(SituationFamiliale situationFamiliale) {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        return estCouple(situationFamiliale) ? 2.0 : 1.0;</span>
+    }
+
+    /**
+     * Calcule le nombre total de parts du foyer fiscal.
+     */
+    public double calculerPartsFoyer(SituationFamiliale situationFamiliale,
+                                     int nbEnfants,
+                                     int nbEnfantsHandicapes,
+                                     boolean parentIsole) {
+<span class="fc" id="L46">        double parts = calculerPartsDeclarants(situationFamiliale);</span>
+<span class="fc" id="L47">        parts += partsPourEnfants(nbEnfants);</span>
+<span class="fc" id="L48">        parts += partsPourParentIsole(parentIsole, nbEnfants);</span>
+<span class="fc" id="L49">        parts += partsPourVeufAvecEnfants(situationFamiliale, nbEnfants);</span>
+<span class="fc" id="L50">        parts += nbEnfantsHandicapes * DEMI_PART_ENFANT_HANDICAPE;</span>
+<span class="fc" id="L51">        return parts;</span>
+    }
+
+    private double partsPourEnfants(int nbEnfants) {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        if (nbEnfants &lt;= SEUIL_NB_ENFANTS_PART_COMPLETE) {</span>
+<span class="fc" id="L56">            return nbEnfants * DEMI_PART_PAR_ENFANT;</span>
+        }
+        // 1 part pour les 2 premiers enfants (0.5 + 0.5) + 1 part complète par enfant
+        // supplémentaire
+<span class="fc" id="L60">        return 1.0 + (nbEnfants - SEUIL_NB_ENFANTS_PART_COMPLETE) * PART_PAR_ENFANT_AU_DELA_DE_2;</span>
+    }
+
+    private double partsPourParentIsole(boolean parentIsole, int nbEnfants) {
+<span class="pc bpc" id="L64" title="1 of 4 branches missed.">        if (parentIsole &amp;&amp; nbEnfants &gt; 0) {</span>
+<span class="fc" id="L65">            return DEMI_PART_PARENT_ISOLE;</span>
+        }
+<span class="fc" id="L67">        return 0.0;</span>
+    }
+
+    private double partsPourVeufAvecEnfants(SituationFamiliale situationFamiliale, int nbEnfants) {
+<span class="pc bpc" id="L71" title="1 of 4 branches missed.">        if (situationFamiliale == SituationFamiliale.VEUF &amp;&amp; nbEnfants &gt; 0) {</span>
+<span class="fc" id="L72">            return PART_SUPPLEMENTAIRE_VEUF_AVEC_ENFANT;</span>
+        }
+<span class="fc" id="L74">        return 0.0;</span>
+    }
+
+    private boolean estCouple(SituationFamiliale situationFamiliale) {
+<span class="fc bfc" id="L78" title="All 4 branches covered.">        return situationFamiliale == SituationFamiliale.MARIE</span>
+                || situationFamiliale == SituationFamiliale.PACSE;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

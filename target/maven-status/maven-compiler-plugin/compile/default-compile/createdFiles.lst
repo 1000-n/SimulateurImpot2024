@@ -1,0 +1,13 @@
+com/kerware/simulateurreusine/CalculateurImpotProgressif.class
+com/kerware/simulateurreusine/CalculateurParts.class
+com/kerware/simulateurreusine/SimulateurReusine.class
+com/kerware/simulateurreusine/AdaptateurSimulateurReusine.class
+com/kerware/simulateurreusine/CalculateurAbattement.class
+com/kerware/simulateur/SituationFamiliale.class
+com/kerware/simulateur/ICalculateurImpot.class
+com/kerware/simulateur/AdaptateurSimulateur.class
+com/kerware/simulateurreusine/CalculateurDecote.class
+com/kerware/simulateur/Simulateur$1.class
+com/kerware/simulateur/Simulateur.class
+com/kerware/simulateurreusine/CalculateurPlafonnement.class
+com/kerware/simulateurreusine/CalculateurContributionExceptionnelle.class

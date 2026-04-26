@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculateurContributionExceptionnelle.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculateurContributionExceptionnelle.java</span></div><h1>CalculateurContributionExceptionnelle.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+/**
+ * Calculateur de la contribution exceptionnelle sur les hauts revenus (CEHR).
+ *
+ * Implémente l'exigence EXG_IMPOT_07 :
+ *  - Calculée sur le revenu fiscal de référence du foyer entier
+ *  - Barèmes différents pour personne seule et couple
+ *  - Calcul progressif identique au barème de l'impôt principal
+ */
+<span class="fc" id="L11">public final class CalculateurContributionExceptionnelle {</span>
+
+    /** Limites des tranches de la CEHR (en euros). 5 valeurs pour 4 tranches. */
+<span class="fc" id="L14">    private static final int[] LIMITES_TRANCHES_CEHR = {</span>
+            0, 250000, 500000, 1000000, Integer.MAX_VALUE
+    };
+    /** Taux de la CEHR pour une personne seule (célibataire, divorcé, veuf). */
+<span class="fc" id="L18">    private static final double[] TAUX_CEHR_CELIBATAIRE = {</span>
+            0.0, 0.03, 0.04, 0.04
+    };
+    /** Taux de la CEHR pour un couple (marié, pacsé). */
+<span class="fc" id="L22">    private static final double[] TAUX_CEHR_COUPLE = {</span>
+            0.0, 0.0, 0.03, 0.04
+    };
+
+    /** Nombre de parts d'un déclarant seul. */
+    private static final double PARTS_DECLARANT_SEUL = 1.0;
+
+<span class="fc" id="L29">    private final CalculateurImpotProgressif calculateurProgressif</span>
+            = new CalculateurImpotProgressif();
+
+    /**
+     * Calcule la contribution exceptionnelle sur les hauts revenus.
+     *
+     * @param revenuFiscalReference  revenu fiscal de référence du foyer
+     * @param nbPartsDeclarants      nombre de parts des déclarants seuls (1 ou 2)
+     * @return la CEHR arrondie à l'euro le plus proche
+     */
+    public double calculer(double revenuFiscalReference, double nbPartsDeclarants) {
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        double[] tauxApplicables = (nbPartsDeclarants == PARTS_DECLARANT_SEUL)</span>
+<span class="fc" id="L41">                ? TAUX_CEHR_CELIBATAIRE</span>
+<span class="fc" id="L42">                : TAUX_CEHR_COUPLE;</span>
+
+<span class="fc" id="L44">        return Math.round(</span>
+<span class="fc" id="L45">                calculateurProgressif.calculer(revenuFiscalReference,</span>
+                        LIMITES_TRANCHES_CEHR, tauxApplicables)
+        );
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

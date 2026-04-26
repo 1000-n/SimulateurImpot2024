@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SimulateurReusine.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">SimulateurReusine.java</span></div><h1>SimulateurReusine.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+import com.kerware.simulateur.SituationFamiliale;
+
+<span class="fc" id="L5">public final class SimulateurReusine {</span>
+
+
+    // ===== Constantes EXG_IMPOT_04 : barème progressif de l'impôt sur le revenu =====
+    /** Limites des tranches d'imposition (en euros). 6 valeurs pour 5 tranches. */
+<span class="fc" id="L10">    private static final int[] LIMITES_TRANCHES_IMPOT = {</span>
+            0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE
+    };
+    /** Taux d'imposition par tranche (correspondance 1-à-1 avec LIMITES_TRANCHES_IMPOT). */
+<span class="fc" id="L14">    private static final double[] TAUX_IMPOT = {</span>
+            0.0, 0.11, 0.30, 0.41, 0.45
+    };
+
+
+    /** Nombre maximum d'enfants à charge supporté par le simulateur. */
+    private static final int NB_MAX_ENFANTS = 7;
+
+
+
+    // revenu fiscal de référence
+<span class="fc" id="L25">    private double revenuFiscalReference = 0;</span>
+
+    // abattement
+<span class="fc" id="L28">    private double abattement = 0;</span>
+
+    // nombre de parts des  déclarants
+<span class="fc" id="L31">    private double nombrePartsDeclarants = 0;</span>
+    // nombre de parts du foyer fiscal
+<span class="fc" id="L33">    private double nombrePartsFoyer = 0;</span>
+
+    // decote
+<span class="fc" id="L36">    private double decote = 0;</span>
+    // impôt des déclarants
+<span class="fc" id="L38">    private double impotDeclarants = 0;</span>
+    // impôt du foyer fiscal
+<span class="fc" id="L40">    private double impotNet = 0;</span>
+<span class="fc" id="L41">    private double impotAvantDecote = 0;</span>
+    // Contribution exceptionnelle sur les hauts revenus
+<span class="fc" id="L43">    private double contribExceptionnelle = 0;</span>
+
+    // Getters pour adapter le code legacy pour les tests unitaires
+
+    public double getRevenuReference() {
+<span class="nc" id="L48">        return revenuFiscalReference;</span>
+    }
+
+    public double getDecote() {
+<span class="fc" id="L52">        return decote;</span>
+    }
+
+
+    public double getAbattement() {
+<span class="fc" id="L57">        return abattement;</span>
+    }
+
+    public double getNbParts() {
+<span class="fc" id="L61">        return nombrePartsFoyer;</span>
+    }
+
+    public double getImpotAvantDecote() {
+<span class="fc" id="L65">        return impotAvantDecote;</span>
+    }
+
+    public double getImpotNet() {
+<span class="fc" id="L69">        return impotNet;</span>
+    }
+
+    public double getContribExceptionnelle() {
+<span class="fc" id="L73">        return contribExceptionnelle;</span>
+    }
+
+
+    // Fonction de calcul de l'impôt sur le revenu net en France en 2024 sur les revenu 2023
+
+    public int calculImpot(int revenuNetDeclarant1, int revenuNetDeclarant2,
+                           SituationFamiliale situationFamiliale,
+                           int nombreEnfants, int nombreEnfantsHandicapes,
+                           boolean parentIsole) {
+<span class="fc" id="L83">        verifierPreconditions(revenuNetDeclarant1, revenuNetDeclarant2,</span>
+                situationFamiliale, nombreEnfants, nombreEnfantsHandicapes, parentIsole);
+
+        // Abattement - EXIGENCE : EXG_IMPOT_02
+<span class="fc" id="L87">        abattement = new CalculateurAbattement().calculer(</span>
+                revenuNetDeclarant1, revenuNetDeclarant2, situationFamiliale);
+<span class="fc" id="L89">        revenuFiscalReference = Math.max(0, revenuNetDeclarant1 +revenuNetDeclarant2 - abattement);</span>
+
+        // Parts fiscales - EXIGENCE : EXG_IMPOT_03
+<span class="fc" id="L92">        CalculateurParts calculateurParts = new CalculateurParts();</span>
+<span class="fc" id="L93">        nombrePartsDeclarants = calculateurParts.calculerPartsDeclarants(situationFamiliale);</span>
+<span class="fc" id="L94">        nombrePartsFoyer = calculateurParts.calculerPartsFoyer(</span>
+                situationFamiliale, nombreEnfants, nombreEnfantsHandicapes, parentIsole);
+
+        // Contribution exceptionnelle sur les hauts revenus - EXIGENCE : EXG_IMPOT_07
+<span class="fc" id="L98">        contribExceptionnelle = new CalculateurContributionExceptionnelle()</span>
+<span class="fc" id="L99">                .calculer(revenuFiscalReference, nombrePartsDeclarants);</span>
+
+        // Calcul impôt des declarants - EXIGENCE : EXG_IMPOT_04
+<span class="fc" id="L102">        double revenuImposable = revenuFiscalReference / nombrePartsDeclarants;</span>
+<span class="fc" id="L103">        CalculateurImpotProgressif calculateurImpotProgressif = new CalculateurImpotProgressif();</span>
+<span class="fc" id="L104">        impotDeclarants = Math.round(</span>
+<span class="fc" id="L105">                calculateurImpotProgressif.calculer(revenuImposable,</span>
+                        LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
+                        * nombrePartsDeclarants
+        );
+        // Calcul impôt foyer fiscal complet - EXIGENCE : EXG_IMPOT_04
+<span class="fc" id="L110">        revenuImposable = revenuFiscalReference / nombrePartsFoyer;</span>
+<span class="fc" id="L111">        impotNet = Math.round(</span>
+<span class="fc" id="L112">                calculateurImpotProgressif.calculer(revenuImposable,</span>
+                        LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
+                        * nombrePartsFoyer
+        );
+        // Plafonnement du gain lié au quotient familial - EXIGENCE : EXG_IMPOT_05
+<span class="fc" id="L117">        impotNet = new CalculateurPlafonnement().appliquerPlafonnement(</span>
+                impotDeclarants, impotNet, nombrePartsDeclarants, nombrePartsFoyer);
+<span class="fc" id="L119">        impotAvantDecote = impotNet;</span>
+
+        // Calcul de la decote - EXIGENCE : EXG_IMPOT_06
+<span class="fc" id="L122">        decote = new CalculateurDecote().calculer(impotNet, nombrePartsDeclarants);</span>
+
+<span class="fc" id="L124">        impotNet = impotNet - decote;</span>
+<span class="fc" id="L125">        impotNet += contribExceptionnelle;</span>
+<span class="fc" id="L126">        impotNet = Math.round( impotNet );</span>
+<span class="fc" id="L127">        return  (int)impotNet;</span>
+    }
+
+    /**
+     * Vérifie les préconditions sur les paramètres d'entrée.
+     *
+     * @throws IllegalArgumentException si une combinaison de paramètres est invalide
+     */
+    private void verifierPreconditions(int revenuNetDeclarant1, int revenuNetDeclarant2,
+                                       SituationFamiliale situationFamiliale,
+                                       int nbEnfants, int nbEnfantsHandicapes,
+                                       boolean parentIsole) {
+<span class="fc bfc" id="L139" title="All 4 branches covered.">        if (revenuNetDeclarant1 &lt; 0 || revenuNetDeclarant2 &lt; 0) {</span>
+<span class="fc" id="L140">            throw new IllegalArgumentException(&quot;Le revenu net ne peut pas être négatif&quot;);</span>
+        }
+<span class="fc bfc" id="L142" title="All 2 branches covered.">        if (nbEnfants &lt; 0) {</span>
+<span class="fc" id="L143">            throw new IllegalArgumentException(&quot;Le nombre d'enfants ne peut pas être négatif&quot;);</span>
+        }
+<span class="fc bfc" id="L145" title="All 2 branches covered.">        if (nbEnfantsHandicapes &lt; 0) {</span>
+<span class="fc" id="L146">            throw new IllegalArgumentException(&quot;Le nombre d'enfants handicapés ne peut pas &quot; +</span>
+                    &quot;être négatif&quot;);
+        }
+<span class="fc bfc" id="L149" title="All 2 branches covered.">        if (situationFamiliale == null) {</span>
+<span class="fc" id="L150">            throw new IllegalArgumentException(&quot;La situation familiale ne peut pas être null&quot;);</span>
+        }
+<span class="fc bfc" id="L152" title="All 2 branches covered.">        if (nbEnfantsHandicapes &gt; nbEnfants) {</span>
+<span class="fc" id="L153">            throw new IllegalArgumentException(</span>
+                    &quot;Le nombre d'enfants handicapés ne peut pas être supérieur au &quot; +
+                            &quot;nombre d'enfants&quot;);
+        }
+<span class="fc bfc" id="L157" title="All 2 branches covered.">        if (nbEnfants &gt; NB_MAX_ENFANTS) {</span>
+<span class="fc" id="L158">            throw new IllegalArgumentException(</span>
+                    &quot;Le nombre d'enfants ne peut pas être supérieur à &quot; + NB_MAX_ENFANTS);
+        }
+<span class="fc bfc" id="L161" title="All 4 branches covered.">        if (parentIsole &amp;&amp; estCouple(situationFamiliale)) {</span>
+<span class="fc" id="L162">            throw new IllegalArgumentException(&quot;Un parent isolé ne peut pas être marié ou pacsé&quot;);</span>
+        }
+<span class="pc bpc" id="L164" title="1 of 4 branches missed.">        if (estSeul(situationFamiliale) &amp;&amp; revenuNetDeclarant2 &gt; 0) {</span>
+<span class="nc" id="L165">            throw new IllegalArgumentException(</span>
+                    &quot;Un célibataire, un divorcé ou un veuf ne peut pas avoir de revenu pour le &quot; +
+                            &quot;déclarant 2&quot;);
+        }
+<span class="fc" id="L169">    }</span>
+
+    private boolean estCouple(SituationFamiliale situationFamiliale) {
+<span class="fc bfc" id="L172" title="All 4 branches covered.">        return situationFamiliale == SituationFamiliale.MARIE</span>
+                || situationFamiliale == SituationFamiliale.PACSE;
+    }
+
+    private boolean estSeul(SituationFamiliale situationFamiliale) {
+<span class="fc bfc" id="L177" title="All 6 branches covered.">        return situationFamiliale == SituationFamiliale.CELIBATAIRE</span>
+                || situationFamiliale == SituationFamiliale.DIVORCE
+                || situationFamiliale == SituationFamiliale.VEUF;
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculateurDecote.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculateurDecote.java</span></div><h1>CalculateurDecote.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+/**
+ * Calculateur de la décote pour les foyers fiscaux modestes.
+ *
+ * Implémente l'exigence EXG_IMPOT_06 :
+ *  - Si l'impôt est inférieur à un seuil, une décote (réduction) s'applique
+ *  - Seuils différents pour personne seule (1929€) et couple (3191€)
+ *  - Formule : decote = decoteMax - (impot * tauxDecote)
+ *  - La décote ne peut pas dépasser le montant de l'impôt lui-même
+ */
+<span class="fc" id="L12">public final class CalculateurDecote {</span>
+
+    /** Seuil d'impôt en deçà duquel la décote s'applique pour un déclarant seul. */
+    private static final double SEUIL_DECOTE_DECLARANT_SEUL = 1929;
+    /** Seuil d'impôt en deçà duquel la décote s'applique pour un couple. */
+    private static final double SEUIL_DECOTE_DECLARANT_COUPLE = 3191;
+    /** Décote maximale pour un déclarant seul (en euros). */
+    private static final double DECOTE_MAX_DECLARANT_SEUL = 873;
+    /** Décote maximale pour un couple (en euros). */
+    private static final double DECOTE_MAX_DECLARANT_COUPLE = 1444;
+    /** Taux appliqué à l'impôt dans le calcul de la décote. */
+    private static final double TAUX_DECOTE = 0.4525;
+
+    /** Nombre de parts d'un déclarant seul. */
+    private static final double PARTS_DECLARANT_SEUL = 1.0;
+    /** Nombre de parts d'un couple. */
+    private static final double PARTS_COUPLE = 2.0;
+
+    /**
+     * Calcule la décote applicable au foyer fiscal.
+     *
+     * @param impotAvantDecote   montant d'impôt avant application de la décote
+     * @param nbPartsDeclarants  nombre de parts des déclarants seuls (1 ou 2)
+     * @return la décote (toujours ≤ impotAvantDecote)
+     */
+    public double calculer(double impotAvantDecote, double nbPartsDeclarants) {
+<span class="fc" id="L38">        double decote = calculerDecoteBrute(impotAvantDecote, nbPartsDeclarants);</span>
+<span class="fc" id="L39">        decote = Math.round(decote);</span>
+
+        // La décote ne peut pas faire descendre l'impôt en-dessous de zéro
+<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (impotAvantDecote &lt;= decote) {</span>
+<span class="fc" id="L43">            decote = impotAvantDecote;</span>
+        }
+<span class="fc" id="L45">        return decote;</span>
+    }
+
+    private double calculerDecoteBrute(double impotAvantDecote, double nbPartsDeclarants) {
+<span class="fc bfc" id="L49" title="All 4 branches covered.">        if (nbPartsDeclarants == PARTS_DECLARANT_SEUL</span>
+                &amp;&amp; impotAvantDecote &lt; SEUIL_DECOTE_DECLARANT_SEUL) {
+<span class="fc" id="L51">            return DECOTE_MAX_DECLARANT_SEUL - (impotAvantDecote * TAUX_DECOTE);</span>
+        }
+<span class="fc bfc" id="L53" title="All 4 branches covered.">        if (nbPartsDeclarants == PARTS_COUPLE</span>
+                &amp;&amp; impotAvantDecote &lt; SEUIL_DECOTE_DECLARANT_COUPLE) {
+<span class="fc" id="L55">            return DECOTE_MAX_DECLARANT_COUPLE - (impotAvantDecote * TAUX_DECOTE);</span>
+        }
+<span class="fc" id="L57">        return 0;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

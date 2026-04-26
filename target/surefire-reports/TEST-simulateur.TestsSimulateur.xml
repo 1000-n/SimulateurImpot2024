@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.2" name="simulateur.TestsSimulateur" time="0.175" tests="53" errors="0" skipped="0" failures="0">
+  <properties>
+    <property name="java.specification.version" value="25"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/Users/milene/Dev/IUT/SimulateurImpot2024/target/test-classes:/Users/milene/Dev/IUT/SimulateurImpot2024/target/classes:/Users/milene/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/milene/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/milene/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/milene/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/milene/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/milene/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/milene/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/milene/.m2/repository/org/apache/maven/plugins/maven-checkstyle-plugin/3.6.0/maven-checkstyle-plugin-3.6.0.jar:/Users/milene/.m2/repository/org/apache/maven/reporting/maven-reporting-api/4.0.0/maven-reporting-api-4.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/reporting/maven-reporting-impl/4.0.0/maven-reporting-impl-4.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.4.2/maven-shared-utils-3.4.2.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-site-model/2.0.0/doxia-site-model-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-site-renderer/2.0.0/doxia-site-renderer-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-skin-model/2.0.0/doxia-skin-model-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-module-xhtml5/2.0.0/doxia-module-xhtml5-2.0.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-velocity/2.2.0/plexus-velocity-2.2.0.jar:/Users/milene/.m2/repository/org/apache/velocity/velocity-engine-core/2.4/velocity-engine-core-2.4.jar:/Users/milene/.m2/repository/org/apache/velocity/tools/velocity-tools-generic/3.1/velocity-tools-generic-3.1.jar:/Users/milene/.m2/repository/org/apache/commons/commons-digester3/3.2/commons-digester3-3.2.jar:/Users/milene/.m2/repository/com/github/cliftonlabs/json-simple/3.0.2/json-simple-3.0.2.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-module-apt/2.0.0/doxia-module-apt-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-module-xdoc/2.0.0/doxia-module-xdoc-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-archiver/3.6.2/maven-archiver-3.6.2.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-archiver/4.9.2/plexus-archiver-4.9.2.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-io/3.4.2/plexus-io-3.4.2.jar:/Users/milene/.m2/repository/org/apache/commons/commons-compress/1.26.1/commons-compress-1.26.1.jar:/Users/milene/.m2/repository/org/iq80/snappy/snappy/0.4/snappy-0.4.jar:/Users/milene/.m2/repository/org/tukaani/xz/1.9/xz-1.9.jar:/Users/milene/.m2/repository/com/github/luben/zstd-jni/1.5.5-11/zstd-jni-1.5.5-11.jar:/Users/milene/.m2/repository/org/apache/maven/resolver/maven-resolver-api/1.4.1/maven-resolver-api-1.4.1.jar:/Users/milene/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.plexus/0.9.0.M3/org.eclipse.sisu.plexus-0.9.0.M3.jar:/Users/milene/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.inject/0.9.0.M3/org.eclipse.sisu.inject-0.9.0.M3.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-classworlds/2.6.0/plexus-classworlds-2.6.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-integration-tools/2.0.0/doxia-integration-tools-2.0.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-component-annotations/2.2.0/plexus-component-annotations-2.2.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-resources/1.3.0/plexus-resources-1.3.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-utils/4.0.1/plexus-utils-4.0.1.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-xml/3.0.1/plexus-xml-3.0.1.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-i18n/1.0-beta-10/plexus-i18n-1.0-beta-10.jar:/Users/milene/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/Users/milene/.m2/repository/com/puppycrawl/tools/checkstyle/9.3/checkstyle-9.3.jar:/Users/milene/.m2/repository/info/picocli/picocli/4.6.2/picocli-4.6.2.jar:/Users/milene/.m2/repository/org/antlr/antlr4-runtime/4.9.3/antlr4-runtime-4.9.3.jar:/Users/milene/.m2/repository/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar:/Users/milene/.m2/repository/com/google/guava/guava/31.0.1-jre/guava-31.0.1-jre.jar:/Users/milene/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/Users/milene/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/Users/milene/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/Users/milene/.m2/repository/org/checkerframework/checker-qual/3.12.0/checker-qual-3.12.0.jar:/Users/milene/.m2/repository/com/google/errorprone/error_prone_annotations/2.7.1/error_prone_annotations-2.7.1.jar:/Users/milene/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/Users/milene/.m2/repository/org/reflections/reflections/0.10.2/reflections-0.10.2.jar:/Users/milene/.m2/repository/org/javassist/javassist/3.28.0-GA/javassist-3.28.0-GA.jar:/Users/milene/.m2/repository/net/sf/saxon/Saxon-HE/10.6/Saxon-HE-10.6.jar:/Users/milene/.m2/repository/org/apache/commons/commons-lang3/3.17.0/commons-lang3-3.17.0.jar:/Users/milene/.m2/repository/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar:/Users/milene/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar:/Users/milene/.m2/repository/org/apache/maven/plugins/maven-project-info-reports-plugin/3.8.0/maven-project-info-reports-plugin-3.8.0.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-dependency-tree/3.3.0/maven-dependency-tree-3.3.0.jar:/Users/milene/.m2/repository/org/apache/maven/resolver/maven-resolver-util/1.4.1/maven-resolver-util-1.4.1.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-shared-jar/3.1.1/maven-shared-jar-3.1.1.jar:/Users/milene/.m2/repository/commons-codec/commons-codec/1.17.0/commons-codec-1.17.0.jar:/Users/milene/.m2/repository/org/apache/bcel/bcel/6.9.0/bcel-6.9.0.jar:/Users/milene/.m2/repository/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-common-artifact-filters/3.4.0/maven-common-artifact-filters-3.4.0.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-artifact-transfer/0.13.1/maven-artifact-transfer-0.13.1.jar:/Users/milene/.m2/repository/org/apache/maven/maven-core/3.0/maven-core-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-model/3.0/maven-model-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-settings-builder/3.0/maven-settings-builder-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-repository-metadata/3.0/maven-repository-metadata-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-model-builder/3.0/maven-model-builder-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-aether-provider/3.0/maven-aether-provider-3.0.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-impl/1.7/aether-impl-1.7.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-spi/1.7/aether-spi-1.7.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-api/1.7/aether-api-1.7.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-util/1.7/aether-util-1.7.jar:/Users/milene/.m2/repository/org/sonatype/sisu/sisu-inject-plexus/1.4.2/sisu-inject-plexus-1.4.2.jar:/Users/milene/.m2/repository/org/sonatype/sisu/sisu-inject-bean/1.4.2/sisu-inject-bean-1.4.2.jar:/Users/milene/.m2/repository/org/sonatype/sisu/sisu-guice/2.1.7/sisu-guice-2.1.7-noaop.jar:/Users/milene/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar:/Users/milene/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar:/Users/milene/.m2/repository/org/apache/maven/maven-artifact/3.0/maven-artifact-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-api/2.1.0/maven-scm-api-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-manager-plexus/2.1.0/maven-scm-manager-plexus-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-hg/2.1.0/maven-scm-provider-hg-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-svn-commons/2.1.0/maven-scm-provider-svn-commons-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-svnexe/2.1.0/maven-scm-provider-svnexe-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-git-commons/2.1.0/maven-scm-provider-git-commons-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-gitexe/2.1.0/maven-scm-provider-gitexe-2.1.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.27/plexus-interpolation-1.27.jar:/Users/milene/.m2/repository/commons-validator/commons-validator/1.9.0/commons-validator-1.9.0.jar:/Users/milene/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar:/Users/milene/.m2/repository/commons-logging/commons-logging/1.3.2/commons-logging-1.3.2.jar:/Users/milene/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:/Users/milene/.m2/repository/org/jacoco/jacoco-maven-plugin/0.8.10/jacoco-maven-plugin-0.8.10.jar:/Users/milene/.m2/repository/org/apache/maven/shared/file-management/1.2.1/file-management-1.2.1.jar:/Users/milene/.m2/repository/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-shared-io/1.1/maven-shared-io-1.1.jar:/Users/milene/.m2/repository/org/apache/maven/maven-artifact-manager/2.0.2/maven-artifact-manager-2.0.2.jar:/Users/milene/.m2/repository/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-6/wagon-provider-api-1.0-alpha-6.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-container-default/1.0-alpha-9/plexus-container-default-1.0-alpha-9.jar:/Users/milene/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/milene/.m2/repository/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar:/Users/milene/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar:/Users/milene/.m2/repository/org/jacoco/org.jacoco.core/0.8.10/org.jacoco.core-0.8.10.jar:/Users/milene/.m2/repository/org/ow2/asm/asm/9.5/asm-9.5.jar:/Users/milene/.m2/repository/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.jar:/Users/milene/.m2/repository/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.jar:/Users/milene/.m2/repository/org/jacoco/org.jacoco.report/0.8.10/org.jacoco.report-0.8.10.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-core/2.0.0/doxia-core-2.0.0.jar:/Users/milene/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/Users/milene/.m2/repository/commons-io/commons-io/2.17.0/commons-io-2.17.0.jar:/Users/milene/.m2/repository/org/apache/commons/commons-text/1.12.0/commons-text-1.12.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-sink-api/2.0.0/doxia-sink-api-2.0.0.jar:"/>
+    <property name="java.vm.vendor" value="Homebrew"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="os.name" value="Mac OS X"/>
+    <property name="java.vm.specification.version" value="25"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="user.country" value="FR"/>
+    <property name="sun.boot.library.path" value="/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home/lib"/>
+    <property name="sun.java.command" value="/Users/milene/Dev/IUT/SimulateurImpot2024/target/surefire/surefirebooter-20260426233337411_3.jar /Users/milene/Dev/IUT/SimulateurImpot2024/target/surefire 2026-04-26T23-33-37_380-jvmRun1 surefire-20260426233337411_1tmp surefire_0-20260426233337411_2tmp"/>
+    <property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/Users/milene/Dev/IUT/SimulateurImpot2024/target/test-classes:/Users/milene/Dev/IUT/SimulateurImpot2024/target/classes:/Users/milene/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.11.4/junit-jupiter-engine-5.11.4.jar:/Users/milene/.m2/repository/org/junit/platform/junit-platform-engine/1.11.4/junit-platform-engine-1.11.4.jar:/Users/milene/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/Users/milene/.m2/repository/org/junit/platform/junit-platform-commons/1.11.4/junit-platform-commons-1.11.4.jar:/Users/milene/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.11.4/junit-jupiter-api-5.11.4.jar:/Users/milene/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/Users/milene/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.11.4/junit-jupiter-params-5.11.4.jar:/Users/milene/.m2/repository/org/apache/maven/plugins/maven-checkstyle-plugin/3.6.0/maven-checkstyle-plugin-3.6.0.jar:/Users/milene/.m2/repository/org/apache/maven/reporting/maven-reporting-api/4.0.0/maven-reporting-api-4.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/reporting/maven-reporting-impl/4.0.0/maven-reporting-impl-4.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-shared-utils/3.4.2/maven-shared-utils-3.4.2.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-site-model/2.0.0/doxia-site-model-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-site-renderer/2.0.0/doxia-site-renderer-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-skin-model/2.0.0/doxia-skin-model-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-module-xhtml5/2.0.0/doxia-module-xhtml5-2.0.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-velocity/2.2.0/plexus-velocity-2.2.0.jar:/Users/milene/.m2/repository/org/apache/velocity/velocity-engine-core/2.4/velocity-engine-core-2.4.jar:/Users/milene/.m2/repository/org/apache/velocity/tools/velocity-tools-generic/3.1/velocity-tools-generic-3.1.jar:/Users/milene/.m2/repository/org/apache/commons/commons-digester3/3.2/commons-digester3-3.2.jar:/Users/milene/.m2/repository/com/github/cliftonlabs/json-simple/3.0.2/json-simple-3.0.2.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-module-apt/2.0.0/doxia-module-apt-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-module-xdoc/2.0.0/doxia-module-xdoc-2.0.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-archiver/3.6.2/maven-archiver-3.6.2.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-archiver/4.9.2/plexus-archiver-4.9.2.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-io/3.4.2/plexus-io-3.4.2.jar:/Users/milene/.m2/repository/org/apache/commons/commons-compress/1.26.1/commons-compress-1.26.1.jar:/Users/milene/.m2/repository/org/iq80/snappy/snappy/0.4/snappy-0.4.jar:/Users/milene/.m2/repository/org/tukaani/xz/1.9/xz-1.9.jar:/Users/milene/.m2/repository/com/github/luben/zstd-jni/1.5.5-11/zstd-jni-1.5.5-11.jar:/Users/milene/.m2/repository/org/apache/maven/resolver/maven-resolver-api/1.4.1/maven-resolver-api-1.4.1.jar:/Users/milene/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.plexus/0.9.0.M3/org.eclipse.sisu.plexus-0.9.0.M3.jar:/Users/milene/.m2/repository/org/eclipse/sisu/org.eclipse.sisu.inject/0.9.0.M3/org.eclipse.sisu.inject-0.9.0.M3.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-classworlds/2.6.0/plexus-classworlds-2.6.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-integration-tools/2.0.0/doxia-integration-tools-2.0.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-component-annotations/2.2.0/plexus-component-annotations-2.2.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-resources/1.3.0/plexus-resources-1.3.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-utils/4.0.1/plexus-utils-4.0.1.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-xml/3.0.1/plexus-xml-3.0.1.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-i18n/1.0-beta-10/plexus-i18n-1.0-beta-10.jar:/Users/milene/.m2/repository/org/slf4j/slf4j-api/1.7.36/slf4j-api-1.7.36.jar:/Users/milene/.m2/repository/com/puppycrawl/tools/checkstyle/9.3/checkstyle-9.3.jar:/Users/milene/.m2/repository/info/picocli/picocli/4.6.2/picocli-4.6.2.jar:/Users/milene/.m2/repository/org/antlr/antlr4-runtime/4.9.3/antlr4-runtime-4.9.3.jar:/Users/milene/.m2/repository/commons-beanutils/commons-beanutils/1.9.4/commons-beanutils-1.9.4.jar:/Users/milene/.m2/repository/com/google/guava/guava/31.0.1-jre/guava-31.0.1-jre.jar:/Users/milene/.m2/repository/com/google/guava/failureaccess/1.0.1/failureaccess-1.0.1.jar:/Users/milene/.m2/repository/com/google/guava/listenablefuture/9999.0-empty-to-avoid-conflict-with-guava/listenablefuture-9999.0-empty-to-avoid-conflict-with-guava.jar:/Users/milene/.m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar:/Users/milene/.m2/repository/org/checkerframework/checker-qual/3.12.0/checker-qual-3.12.0.jar:/Users/milene/.m2/repository/com/google/errorprone/error_prone_annotations/2.7.1/error_prone_annotations-2.7.1.jar:/Users/milene/.m2/repository/com/google/j2objc/j2objc-annotations/1.3/j2objc-annotations-1.3.jar:/Users/milene/.m2/repository/org/reflections/reflections/0.10.2/reflections-0.10.2.jar:/Users/milene/.m2/repository/org/javassist/javassist/3.28.0-GA/javassist-3.28.0-GA.jar:/Users/milene/.m2/repository/net/sf/saxon/Saxon-HE/10.6/Saxon-HE-10.6.jar:/Users/milene/.m2/repository/org/apache/commons/commons-lang3/3.17.0/commons-lang3-3.17.0.jar:/Users/milene/.m2/repository/javax/xml/bind/jaxb-api/2.3.1/jaxb-api-2.3.1.jar:/Users/milene/.m2/repository/javax/activation/javax.activation-api/1.2.0/javax.activation-api-1.2.0.jar:/Users/milene/.m2/repository/org/apache/maven/plugins/maven-project-info-reports-plugin/3.8.0/maven-project-info-reports-plugin-3.8.0.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-dependency-tree/3.3.0/maven-dependency-tree-3.3.0.jar:/Users/milene/.m2/repository/org/apache/maven/resolver/maven-resolver-util/1.4.1/maven-resolver-util-1.4.1.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-shared-jar/3.1.1/maven-shared-jar-3.1.1.jar:/Users/milene/.m2/repository/commons-codec/commons-codec/1.17.0/commons-codec-1.17.0.jar:/Users/milene/.m2/repository/org/apache/bcel/bcel/6.9.0/bcel-6.9.0.jar:/Users/milene/.m2/repository/org/apache/commons/commons-collections4/4.4/commons-collections4-4.4.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-common-artifact-filters/3.4.0/maven-common-artifact-filters-3.4.0.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-artifact-transfer/0.13.1/maven-artifact-transfer-0.13.1.jar:/Users/milene/.m2/repository/org/apache/maven/maven-core/3.0/maven-core-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-model/3.0/maven-model-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-settings/3.0/maven-settings-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-settings-builder/3.0/maven-settings-builder-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-repository-metadata/3.0/maven-repository-metadata-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-model-builder/3.0/maven-model-builder-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/maven-aether-provider/3.0/maven-aether-provider-3.0.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-impl/1.7/aether-impl-1.7.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-spi/1.7/aether-spi-1.7.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-api/1.7/aether-api-1.7.jar:/Users/milene/.m2/repository/org/sonatype/aether/aether-util/1.7/aether-util-1.7.jar:/Users/milene/.m2/repository/org/sonatype/sisu/sisu-inject-plexus/1.4.2/sisu-inject-plexus-1.4.2.jar:/Users/milene/.m2/repository/org/sonatype/sisu/sisu-inject-bean/1.4.2/sisu-inject-bean-1.4.2.jar:/Users/milene/.m2/repository/org/sonatype/sisu/sisu-guice/2.1.7/sisu-guice-2.1.7-noaop.jar:/Users/milene/.m2/repository/org/sonatype/plexus/plexus-sec-dispatcher/1.3/plexus-sec-dispatcher-1.3.jar:/Users/milene/.m2/repository/org/sonatype/plexus/plexus-cipher/1.4/plexus-cipher-1.4.jar:/Users/milene/.m2/repository/org/apache/maven/maven-artifact/3.0/maven-artifact-3.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-api/2.1.0/maven-scm-api-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-manager-plexus/2.1.0/maven-scm-manager-plexus-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-hg/2.1.0/maven-scm-provider-hg-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-svn-commons/2.1.0/maven-scm-provider-svn-commons-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-svnexe/2.1.0/maven-scm-provider-svnexe-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-git-commons/2.1.0/maven-scm-provider-git-commons-2.1.0.jar:/Users/milene/.m2/repository/org/apache/maven/scm/maven-scm-provider-gitexe/2.1.0/maven-scm-provider-gitexe-2.1.0.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-interpolation/1.27/plexus-interpolation-1.27.jar:/Users/milene/.m2/repository/commons-validator/commons-validator/1.9.0/commons-validator-1.9.0.jar:/Users/milene/.m2/repository/commons-digester/commons-digester/2.1/commons-digester-2.1.jar:/Users/milene/.m2/repository/commons-logging/commons-logging/1.3.2/commons-logging-1.3.2.jar:/Users/milene/.m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar:/Users/milene/.m2/repository/org/jacoco/jacoco-maven-plugin/0.8.10/jacoco-maven-plugin-0.8.10.jar:/Users/milene/.m2/repository/org/apache/maven/shared/file-management/1.2.1/file-management-1.2.1.jar:/Users/milene/.m2/repository/org/apache/maven/maven-plugin-api/2.0.6/maven-plugin-api-2.0.6.jar:/Users/milene/.m2/repository/org/apache/maven/shared/maven-shared-io/1.1/maven-shared-io-1.1.jar:/Users/milene/.m2/repository/org/apache/maven/maven-artifact-manager/2.0.2/maven-artifact-manager-2.0.2.jar:/Users/milene/.m2/repository/org/apache/maven/wagon/wagon-provider-api/1.0-alpha-6/wagon-provider-api-1.0-alpha-6.jar:/Users/milene/.m2/repository/org/codehaus/plexus/plexus-container-default/1.0-alpha-9/plexus-container-default-1.0-alpha-9.jar:/Users/milene/.m2/repository/junit/junit/3.8.1/junit-3.8.1.jar:/Users/milene/.m2/repository/classworlds/classworlds/1.1-alpha-2/classworlds-1.1-alpha-2.jar:/Users/milene/.m2/repository/org/jacoco/org.jacoco.agent/0.8.10/org.jacoco.agent-0.8.10-runtime.jar:/Users/milene/.m2/repository/org/jacoco/org.jacoco.core/0.8.10/org.jacoco.core-0.8.10.jar:/Users/milene/.m2/repository/org/ow2/asm/asm/9.5/asm-9.5.jar:/Users/milene/.m2/repository/org/ow2/asm/asm-commons/9.5/asm-commons-9.5.jar:/Users/milene/.m2/repository/org/ow2/asm/asm-tree/9.5/asm-tree-9.5.jar:/Users/milene/.m2/repository/org/jacoco/org.jacoco.report/0.8.10/org.jacoco.report-0.8.10.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-core/2.0.0/doxia-core-2.0.0.jar:/Users/milene/.m2/repository/javax/inject/javax.inject/1/javax.inject-1.jar:/Users/milene/.m2/repository/commons-io/commons-io/2.17.0/commons-io-2.17.0.jar:/Users/milene/.m2/repository/org/apache/commons/commons-text/1.12.0/commons-text-1.12.0.jar:/Users/milene/.m2/repository/org/apache/maven/doxia/doxia-sink-api/2.0.0/doxia-sink-api-2.0.0.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/Users/milene"/>
+    <property name="user.language" value="fr"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2026-01-20"/>
+    <property name="java.home" value="/opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/Users/milene/Dev/IUT/SimulateurImpot2024"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="apple.awt.application.name" value="ForkedBooter"/>
+    <property name="surefire.real.class.path" value="/Users/milene/Dev/IUT/SimulateurImpot2024/target/surefire/surefirebooter-20260426233337411_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.runtime.version" value="25.0.2"/>
+    <property name="user.name" value="milene"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="26.4.1"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="java.vendor.version" value="Homebrew"/>
+    <property name="localRepository" value="/Users/milene/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://github.com/Homebrew/homebrew-core/issues"/>
+    <property name="java.io.tmpdir" value="/var/folders/5r/rxlz9xl10693x452fvdyx7w80000gn/T/"/>
+    <property name="java.version" value="25.0.2"/>
+    <property name="user.dir" value="/Users/milene/Dev/IUT/SimulateurImpot2024"/>
+    <property name="os.arch" value="aarch64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/Users/milene/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vendor" value="Homebrew"/>
+    <property name="java.vm.version" value="25.0.2"/>
+    <property name="stdin.encoding" value="UTF-8"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+    <property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+    <property name="java.class.version" value="69.0"/>
+  </properties>
+  <testcase name="Tests de la contribution exceptionnelle sur les hauts revenus rev1=35000€, rev2=0€, CELIBATAIRE =&gt; CEHR attendue = 0€" classname="simulateur.TestsSimulateur" time="0.013">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 35000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 3500.0
+Revenu fiscal de référence : 31500.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 2736.0
+Impôt brut du foyer fiscal complet : 2736.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 2736.0
+Decote : 0.0
+Impôt sur le revenu net final : 2736.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests de la contribution exceptionnelle sur les hauts revenus rev1=564171€, rev2=0€, CELIBATAIRE =&gt; CEHR attendue = 9500€" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 564171
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 14171.0
+Revenu fiscal de référence : 550000.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 9500.0
+Impôt brut des déclarants : 224644.0
+Impôt brut du foyer fiscal complet : 224644.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 224644.0
+Decote : 0.0
+Impôt sur le revenu net final : 234144.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests de la contribution exceptionnelle sur les hauts revenus rev1=500000€, rev2=478342€, MARIE =&gt; CEHR attendue = 13500€" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 500000
+Revenu net declarant2 : 478342
+Situation familiale : MARIE
+Abattement : 28342.0
+Revenu fiscal de référence : 950000.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 13500.0
+Impôt brut des déclarants : 381789.0
+Impôt brut du foyer fiscal complet : 381789.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 381789.0
+Decote : 0.0
+Impôt sur le revenu net final : 395289.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests de la contribution exceptionnelle sur les hauts revenus rev1=1500000€, rev2=0€, CELIBATAIRE =&gt; CEHR attendue = 46933€" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 1500000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 14171.0
+Revenu fiscal de référence : 1485829.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 46933.0
+Impôt brut des déclarants : 645768.0
+Impôt brut du foyer fiscal complet : 645768.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 645768.0
+Decote : 0.0
+Impôt sur le revenu net final : 692701.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des différents taux marginaux d&apos;imposition[1] 12000, CELIBATAIRE, 0, 0, false, 0" classname="simulateur.TestsSimulateur" time="0.003">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 12000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 1200.0
+Revenu fiscal de référence : 10800.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 0.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des différents taux marginaux d&apos;imposition[2] 20000, CELIBATAIRE, 0, 0, false, 199" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 20000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 2000.0
+Revenu fiscal de référence : 18000.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 738.0
+Impôt brut du foyer fiscal complet : 738.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 738.0
+Decote : 539.0
+Impôt sur le revenu net final : 199.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des différents taux marginaux d&apos;imposition[3] 35000, CELIBATAIRE, 0, 0, false, 2736" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 35000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 3500.0
+Revenu fiscal de référence : 31500.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 2736.0
+Impôt brut du foyer fiscal complet : 2736.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 2736.0
+Decote : 0.0
+Impôt sur le revenu net final : 2736.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des différents taux marginaux d&apos;imposition[4] 95000, CELIBATAIRE, 0, 0, false, 19284" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 95000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 9500.0
+Revenu fiscal de référence : 85500.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 19284.0
+Impôt brut du foyer fiscal complet : 19284.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 19284.0
+Decote : 0.0
+Impôt sur le revenu net final : 19284.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des différents taux marginaux d&apos;imposition[5] 200000, CELIBATAIRE, 0, 0, false, 60768" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 200000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 14171.0
+Revenu fiscal de référence : 185829.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 60768.0
+Impôt brut du foyer fiscal complet : 60768.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 60768.0
+Decote : 0.0
+Impôt sur le revenu net final : 60768.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=-1, revenuDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.002"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=20000, revenuDeclarant2=0, situationFamiliale=null, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.0"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=35000, revenuDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=-1, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.0"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=95000, revenuDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=-1, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.001"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=200000, revenuDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=3, nbEnfantsSituationHandicap=4, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.0"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=200000, revenuDeclarant2=0, situationFamiliale=MARIE, nbEnfantsACharge=3, nbEnfantsSituationHandicap=2, parentIsole=true" classname="simulateur.TestsSimulateur" time="0.0"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=200000, revenuDeclarant2=0, situationFamiliale=PACSE, nbEnfantsACharge=3, nbEnfantsSituationHandicap=2, parentIsole=true" classname="simulateur.TestsSimulateur" time="0.001"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=200000, revenuDeclarant2=0, situationFamiliale=MARIE, nbEnfantsACharge=8, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.0"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=200000, revenuDeclarant2=10000, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=8, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.0"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=200000, revenuDeclarant2=10000, situationFamiliale=VEUF, nbEnfantsACharge=8, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.001"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=200000, revenuDeclarant2=10000, situationFamiliale=DIVORCE, nbEnfantsACharge=8, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.0"/>
+  <testcase name="Tests de robustesse avec des valeurs interdites Test avec revenuNetDeclarant1=20000, revenuDeclarant2=-1, situationFamiliale=MARIE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false" classname="simulateur.TestsSimulateur" time="0.001"/>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[1] 24000, CELIBATAIRE, 0, 0, false, 1" classname="simulateur.TestsSimulateur" time="0.002">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 2400.0
+Revenu fiscal de référence : 21600.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 1134.0
+Impôt brut du foyer fiscal complet : 1134.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 1134.0
+Decote : 360.0
+Impôt sur le revenu net final : 774.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[2] 24000, CELIBATAIRE, 1, 0, false, 1.5" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 2400.0
+Revenu fiscal de référence : 21600.0
+Nombre d'enfants  : 1
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.5
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 1134.0
+Impôt brut du foyer fiscal complet : 512.0
+Baisse d'impôt : 622.0
+Plafond de baisse autorisée 1759.0
+Impôt brut après plafonnement avant decote : 512.0
+Decote : 512.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[3] 24000, CELIBATAIRE, 2, 0, false, 2" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 2400.0
+Revenu fiscal de référence : 21600.0
+Nombre d'enfants  : 2
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 1134.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 1134.0
+Plafond de baisse autorisée 3518.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[4] 24000, CELIBATAIRE, 3, 0, false, 3" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 2400.0
+Revenu fiscal de référence : 21600.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 3.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 1134.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 1134.0
+Plafond de baisse autorisée 7036.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[5] 24000, MARIE, 0, 0, false, 2" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : MARIE
+Abattement : 2895.0
+Revenu fiscal de référence : 21105.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 0.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[6] 24000, PACSE, 0, 0, false, 2" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : PACSE
+Abattement : 2895.0
+Revenu fiscal de référence : 21105.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 0.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[7] 24000, MARIE, 3, 1, false, 4.5" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : MARIE
+Abattement : 2895.0
+Revenu fiscal de référence : 21105.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 1
+Parent isolé : false
+Nombre de parts : 4.5
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 0.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 8795.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[8] 24000, DIVORCE, 2, 0, true, 2.5" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : DIVORCE
+Abattement : 2400.0
+Revenu fiscal de référence : 21600.0
+Nombre d'enfants  : 2
+Nombre d'enfants handicapés : 0
+Parent isolé : true
+Nombre de parts : 2.5
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 1134.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 1134.0
+Plafond de baisse autorisée 5277.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul des parts pour différents foyers fiscaux[9] 24000, VEUF, 3, 0, true, 4.5" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 24000
+Revenu net declarant2 : 0
+Situation familiale : VEUF
+Abattement : 2400.0
+Revenu fiscal de référence : 21600.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 0
+Parent isolé : true
+Nombre de parts : 4.5
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 1134.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 1134.0
+Plafond de baisse autorisée 12313.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du plafonnement du gain lié au quotient familial Foyer MARIE avec rev1=30000€, rev2=35000€, 3 enfants =&gt; impôt avant décote attendu = 1466€" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 30000
+Revenu net declarant2 : 35000
+Situation familiale : MARIE
+Abattement : 6500.0
+Revenu fiscal de référence : 58500.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 4.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 4122.0
+Impôt brut du foyer fiscal complet : 1466.0
+Baisse d'impôt : 2656.0
+Plafond de baisse autorisée 7036.0
+Impôt brut après plafonnement avant decote : 1466.0
+Decote : 781.0
+Impôt sur le revenu net final : 685.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du plafonnement du gain lié au quotient familial Foyer MARIE avec rev1=200000€, rev2=0€, 3 enfants =&gt; impôt avant décote attendu = 37408€" classname="simulateur.TestsSimulateur" time="0.002">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 200000
+Revenu net declarant2 : 0
+Situation familiale : MARIE
+Abattement : 14666.0
+Revenu fiscal de référence : 185334.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 4.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 44444.0
+Impôt brut du foyer fiscal complet : 28745.0
+Baisse d'impôt : 15699.0
+Plafond de baisse autorisée 7036.0
+Impôt brut après plafonnement avant decote : 37408.0
+Decote : 0.0
+Impôt sur le revenu net final : 37408.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des abattements pour les foyers fiscaux[1] 4900, CELIBATAIRE, 0, 0, false, 495" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 4900
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 495.0
+Revenu fiscal de référence : 4405.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 0.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des abattements pour les foyers fiscaux[2] 12000, CELIBATAIRE, 0, 0, false, 1200" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 12000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 1200.0
+Revenu fiscal de référence : 10800.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 0.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests des abattements pour les foyers fiscaux[3] 200000, CELIBATAIRE, 0, 0, false, 14171" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 200000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 14171.0
+Revenu fiscal de référence : 185829.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 60768.0
+Impôt brut du foyer fiscal complet : 60768.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 60768.0
+Decote : 0.0
+Impôt sur le revenu net final : 60768.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul de la décote pour les foyers modestes rev1=20000€, rev2=0€, CELIBATAIRE =&gt; décote attendue = 539€" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 20000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 2000.0
+Revenu fiscal de référence : 18000.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 738.0
+Impôt brut du foyer fiscal complet : 738.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 738.0
+Decote : 539.0
+Impôt sur le revenu net final : 199.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul de la décote pour les foyers modestes rev1=20000€, rev2=20000€, MARIE =&gt; décote attendue = 777€" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 20000
+Revenu net declarant2 : 20000
+Situation familiale : MARIE
+Abattement : 4000.0
+Revenu fiscal de référence : 36000.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 1475.0
+Impôt brut du foyer fiscal complet : 1475.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 1475.0
+Decote : 777.0
+Impôt sur le revenu net final : 698.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul de la décote pour les foyers modestes rev1=35000€, rev2=0€, CELIBATAIRE =&gt; décote attendue = 0€" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 35000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 3500.0
+Revenu fiscal de référence : 31500.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 2736.0
+Impôt brut du foyer fiscal complet : 2736.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 2736.0
+Decote : 0.0
+Impôt sur le revenu net final : 2736.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests du calcul de la décote pour les foyers modestes rev1=14000€, rev2=14000€, MARIE =&gt; décote attendue = 287€" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 14000
+Revenu net declarant2 : 14000
+Situation familiale : MARIE
+Abattement : 2800.0
+Revenu fiscal de référence : 25200.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 287.0
+Impôt brut du foyer fiscal complet : 287.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 287.0
+Decote : 287.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=30000, revenuNetDeclarant2=35000, situationFamiliale=MARIE, nbEnfantsACharge=3, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 685" classname="simulateur.TestsSimulateur" time="0.013">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 30000
+Revenu net declarant2 : 35000
+Situation familiale : MARIE
+Abattement : 6500.0
+Revenu fiscal de référence : 58500.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 4.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 4122.0
+Impôt brut du foyer fiscal complet : 1466.0
+Baisse d'impôt : 2656.0
+Plafond de baisse autorisée 7036.0
+Impôt brut après plafonnement avant decote : 1466.0
+Decote : 781.0
+Impôt sur le revenu net final : 685.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=35000, revenuNetDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 2736" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 35000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 3500.0
+Revenu fiscal de référence : 31500.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 2736.0
+Impôt brut du foyer fiscal complet : 2736.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 2736.0
+Decote : 0.0
+Impôt sur le revenu net final : 2736.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=65000, revenuNetDeclarant2=0, situationFamiliale=VEUF, nbEnfantsACharge=3, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 1256" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 65000
+Revenu net declarant2 : 0
+Situation familiale : VEUF
+Abattement : 6500.0
+Revenu fiscal de référence : 58500.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 4.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 10836.0
+Impôt brut du foyer fiscal complet : 1466.0
+Baisse d'impôt : 9370.0
+Plafond de baisse autorisée 10554.0
+Impôt brut après plafonnement avant decote : 1466.0
+Decote : 210.0
+Impôt sur le revenu net final : 1256.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=30000, revenuNetDeclarant2=35000, situationFamiliale=MARIE, nbEnfantsACharge=3, nbEnfantsSituationHandicap=1, parentIsole=false - IMPOT NET ATTENDU = 0" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 30000
+Revenu net declarant2 : 35000
+Situation familiale : MARIE
+Abattement : 6500.0
+Revenu fiscal de référence : 58500.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 1
+Parent isolé : false
+Nombre de parts : 4.5
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 4122.0
+Impôt brut du foyer fiscal complet : 844.0
+Baisse d'impôt : 3278.0
+Plafond de baisse autorisée 8795.0
+Impôt brut après plafonnement avant decote : 844.0
+Decote : 844.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=35000, revenuNetDeclarant2=0, situationFamiliale=DIVORCE, nbEnfantsACharge=1, nbEnfantsSituationHandicap=0, parentIsole=true - IMPOT NET ATTENDU = 550" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 35000
+Revenu net declarant2 : 0
+Situation familiale : DIVORCE
+Abattement : 3500.0
+Revenu fiscal de référence : 31500.0
+Nombre d'enfants  : 1
+Nombre d'enfants handicapés : 0
+Parent isolé : true
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 2736.0
+Impôt brut du foyer fiscal complet : 980.0
+Baisse d'impôt : 1756.0
+Plafond de baisse autorisée 3518.0
+Impôt brut après plafonnement avant decote : 980.0
+Decote : 430.0
+Impôt sur le revenu net final : 550.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=35000, revenuNetDeclarant2=0, situationFamiliale=DIVORCE, nbEnfantsACharge=2, nbEnfantsSituationHandicap=0, parentIsole=true - IMPOT NET ATTENDU = 0" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 35000
+Revenu net declarant2 : 0
+Situation familiale : DIVORCE
+Abattement : 3500.0
+Revenu fiscal de référence : 31500.0
+Nombre d'enfants  : 2
+Nombre d'enfants handicapés : 0
+Parent isolé : true
+Nombre de parts : 2.5
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 2736.0
+Impôt brut du foyer fiscal complet : 359.0
+Baisse d'impôt : 2377.0
+Plafond de baisse autorisée 5277.0
+Impôt brut après plafonnement avant decote : 359.0
+Decote : 359.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=50000, revenuNetDeclarant2=0, situationFamiliale=DIVORCE, nbEnfantsACharge=3, nbEnfantsSituationHandicap=0, parentIsole=true - IMPOT NET ATTENDU = 1" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 50000
+Revenu net declarant2 : 0
+Situation familiale : DIVORCE
+Abattement : 5000.0
+Revenu fiscal de référence : 45000.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 0
+Parent isolé : true
+Nombre de parts : 3.5
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 6786.0
+Impôt brut du foyer fiscal complet : 602.0
+Baisse d'impôt : 6184.0
+Plafond de baisse autorisée 8795.0
+Impôt brut après plafonnement avant decote : 602.0
+Decote : 601.0
+Impôt sur le revenu net final : 1.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=50000, revenuNetDeclarant2=0, situationFamiliale=DIVORCE, nbEnfantsACharge=3, nbEnfantsSituationHandicap=1, parentIsole=true - IMPOT NET ATTENDU = 0" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 50000
+Revenu net declarant2 : 0
+Situation familiale : DIVORCE
+Abattement : 5000.0
+Revenu fiscal de référence : 45000.0
+Nombre d'enfants  : 3
+Nombre d'enfants handicapés : 1
+Parent isolé : true
+Nombre de parts : 4.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 6786.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 6786.0
+Plafond de baisse autorisée 10554.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=95000, revenuNetDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 19284" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 95000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 9500.0
+Revenu fiscal de référence : 85500.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 19284.0
+Impôt brut du foyer fiscal complet : 19284.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 19284.0
+Decote : 0.0
+Impôt sur le revenu net final : 19284.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=0, revenuNetDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 0" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 0
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 495.0
+Revenu fiscal de référence : 0.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 0.0
+Impôt brut des déclarants : 0.0
+Impôt brut du foyer fiscal complet : 0.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 0.0
+Decote : 0.0
+Impôt sur le revenu net final : 0.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=950000, revenuNetDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 423201" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 950000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 14171.0
+Revenu fiscal de référence : 935829.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 24933.0
+Impôt brut des déclarants : 398268.0
+Impôt brut du foyer fiscal complet : 398268.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 398268.0
+Decote : 0.0
+Impôt sur le revenu net final : 423201.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=300000, revenuNetDeclarant2=650000, situationFamiliale=MARIE, nbEnfantsACharge=2, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 378167" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 300000
+Revenu net declarant2 : 650000
+Situation familiale : MARIE
+Abattement : 28342.0
+Revenu fiscal de référence : 921658.0
+Nombre d'enfants  : 2
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 3.0
+Contribution exceptionnelle sur les hauts revenus : 12650.0
+Impôt brut des déclarants : 369035.0
+Impôt brut du foyer fiscal complet : 346180.0
+Baisse d'impôt : 22855.0
+Plafond de baisse autorisée 3518.0
+Impôt brut après plafonnement avant decote : 365517.0
+Decote : 0.0
+Impôt sur le revenu net final : 378167.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=1500000, revenuNetDeclarant2=0, situationFamiliale=CELIBATAIRE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 692701" classname="simulateur.TestsSimulateur" time="0.001">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 1500000
+Revenu net declarant2 : 0
+Situation familiale : CELIBATAIRE
+Abattement : 14171.0
+Revenu fiscal de référence : 1485829.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 1.0
+Contribution exceptionnelle sur les hauts revenus : 46933.0
+Impôt brut des déclarants : 645768.0
+Impôt brut du foyer fiscal complet : 645768.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 645768.0
+Decote : 0.0
+Impôt sur le revenu net final : 692701.0
+]]></system-out>
+  </testcase>
+  <testcase name="Tests supplémentaires de cas variés de foyers fiscaux - avec revenuNetDeclarant1=300000, revenuNetDeclarant2=300000, situationFamiliale=MARIE, nbEnfantsACharge=0, nbEnfantsSituationHandicap=0, parentIsole=false - IMPOT NET ATTENDU = 213685" classname="simulateur.TestsSimulateur" time="0.0">
+    <system-out><![CDATA[--------------------------------------------------
+Revenu net declarant1 : 300000
+Revenu net declarant2 : 300000
+Situation familiale : MARIE
+Abattement : 28342.0
+Revenu fiscal de référence : 571658.0
+Nombre d'enfants  : 0
+Nombre d'enfants handicapés : 0
+Parent isolé : false
+Nombre de parts : 2.0
+Contribution exceptionnelle sur les hauts revenus : 2150.0
+Impôt brut des déclarants : 211535.0
+Impôt brut du foyer fiscal complet : 211535.0
+Baisse d'impôt : 0.0
+Plafond de baisse autorisée 0.0
+Impôt brut après plafonnement avant decote : 211535.0
+Decote : 0.0
+Impôt sur le revenu net final : 213685.0
+]]></system-out>
+  </testcase>
+</testsuite>

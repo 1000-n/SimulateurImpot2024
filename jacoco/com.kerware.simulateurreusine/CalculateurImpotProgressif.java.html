@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CalculateurImpotProgressif.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">SimulateurImpot2024</a> &gt; <a href="index.source.html" class="el_package">com.kerware.simulateurreusine</a> &gt; <span class="el_source">CalculateurImpotProgressif.java</span></div><h1>CalculateurImpotProgressif.java</h1><pre class="source lang-java linenums">package com.kerware.simulateurreusine;
+
+/**
+ * Calculateur générique d'un montant par tranches progressives.
+ *
+ * Utilisé pour :
+ *  - le barème de l'impôt sur le revenu (EXG_IMPOT_04)
+ *  - la contribution exceptionnelle sur les hauts revenus (EXG_IMPOT_07)
+ *
+ * Le principe : pour un revenu donné, chaque tranche traversée est taxée
+ * à son propre taux. Le résultat est la somme des contributions de toutes
+ * les tranches traversées.
+ *
+ * Exemple : pour un revenu de 30000€ avec les tranches de l'impôt 2024
+ * (0% jusqu'à 11294€, 11% jusqu'à 28797€, 30% au-delà) :
+ *   (28797 - 11294) * 11% + (30000 - 28797) * 30% = 1925 + 361 = 2286€
+ */
+<span class="fc" id="L18">public final class CalculateurImpotProgressif {</span>
+
+    /**
+     * Calcule un montant progressif sur les tranches.
+     *
+     * @param montantImposable montant à imposer (ex : revenu fiscal de référence par part)
+     * @param limites          limites des tranches (longueur N+1 pour N tranches,
+     *                         première = 0, dernière = Integer.MAX_VALUE)
+     * @param taux             taux de chaque tranche (longueur N)
+     * @return le montant calculé (non arrondi)
+     */
+    public double calculer(double montantImposable, int[] limites, double[] taux) {
+<span class="fc" id="L30">        double montant = 0;</span>
+<span class="pc bpc" id="L31" title="1 of 2 branches missed.">        for (int i = 0; i &lt; taux.length; i++) {</span>
+<span class="pc bpc" id="L32" title="1 of 4 branches missed.">            if (montantImposable &gt;= limites[i] &amp;&amp; montantImposable &lt; limites[i + 1]) {</span>
+                // On est dans la tranche courante : on prend ce qui dépasse la limite basse
+<span class="fc" id="L34">                montant += (montantImposable - limites[i]) * taux[i];</span>
+<span class="fc" id="L35">                break;</span>
+            } else {
+                // On a déjà dépassé cette tranche : on la compte en plein
+<span class="fc" id="L38">                montant += (limites[i + 1] - limites[i]) * taux[i];</span>
+            }
+        }
+<span class="fc" id="L41">        return montant;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>
