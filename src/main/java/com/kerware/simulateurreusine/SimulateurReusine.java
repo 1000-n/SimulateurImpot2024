@@ -3,64 +3,55 @@ package com.kerware.simulateurreusine;
 import com.kerware.simulateur.SituationFamiliale;
 
 public class SimulateurReusine {
-    // Les limites des tranches de revenus imposables
-    private int l00 = 0 ;
-    private int l01 = 11294;
-    private int l02 = 28797;
-    private int l03 = 82341;
-    private int l04 = 177106;
-    private int l05 = Integer.MAX_VALUE;
 
-    private int[] limites = new int[6];
+    // ===== Constantes EXG_IMPOT_02 : abattement sur revenus nets =====
+    /** Plafond annuel de l'abattement par déclarant en 2024 (en euros). */
+    private static final int PLAFOND_ABATTEMENT = 14171;
+    /** Minimum annuel de l'abattement par déclarant en 2024 (en euros). */
+    private static final int MINIMUM_ABATTEMENT = 495;
+    /** Taux de l'abattement appliqué aux revenus nets déclarés (10%). */
+    private static final double TAUX_ABATTEMENT = 0.1;
 
-    // Les taux d'imposition par tranche
-    private double t00 = 0.0;
-    private double t01 = 0.11;
-    private double t02 = 0.3;
-    private double t03 = 0.41;
-    private double t04 = 0.45;
 
-    private double[] taux = new double[5];
+    // ===== Constantes EXG_IMPOT_04 : barème progressif de l'impôt sur le revenu =====
+    /** Limites des tranches d'imposition (en euros). 6 valeurs pour 5 tranches. */
+    private static final int[] LIMITES_TRANCHES_IMPOT = {
+            0, 11294, 28797, 82341, 177106, Integer.MAX_VALUE
+    };
+    /** Taux d'imposition par tranche (correspondance 1-à-1 avec LIMITES_TRANCHES_IMPOT). */
+    private static final double[] TAUX_IMPOT = {
+            0.0, 0.11, 0.30, 0.41, 0.45
+    };
 
-    // Les limites des tranches pour la contribution exceptionnelle sur les hauts revenus
-    private int lce00 = 0;
-    private int lce01 = 250000;
-    private int lce02 = 500000;
-    private int lce03 = 1000000;
-    private int lce04 = Integer.MAX_VALUE;
+    // ===== Constantes EXG_IMPOT_05 : plafonnement du quotient familial =====
+    /** Plafond du gain d'impôt apporté par chaque demi-part supplémentaire (en euros). */
+    private static final double PLAFOND_DEMI_PART = 1759;
 
-    private int[] limitesCEHR = new int[5];
+    // ===== Constantes EXG_IMPOT_06 : décote pour les foyers modestes =====
+    /** Seuil d'impôt en deçà duquel la décote s'applique pour un déclarant seul. */
+    private static final double SEUIL_DECOTE_DECLARANT_SEUL = 1929;
+    /** Seuil d'impôt en deçà duquel la décote s'applique pour un couple. */
+    private static final double SEUIL_DECOTE_DECLARANT_COUPLE = 3191;
+    /** Décote maximale pour un déclarant seul (en euros). */
+    private static final double DECOTE_MAX_DECLARANT_SEUL = 873;
+    /** Décote maximale pour un couple (en euros). */
+    private static final double DECOTE_MAX_DECLARANT_COUPLE = 1444;
+    /** Taux appliqué à l'impôt dans le calcul de la décote. */
+    private static final double TAUX_DECOTE = 0.4525;
 
-    // Les taux de la contribution exceptionnelle sur les hauts revenus pour les celibataires
-    private double tce00 = 0.0;
-    private double tce01 = 0.03;
-    private double tce02 = 0.04;
-    private double tce03 = 0.04;
-
-    private double[] tauxCEHRCelibataire = new double[4];
-
-    // Les taux de la contribution exceptionnelle sur les hauts revenus pour les couples
-    private double tce00C = 0.0;
-    private double tce01C = 0.0;
-    private double tce02C = 0.03;
-    private double tce03C = 0.04;
-
-    private double[] tauxCEHRCouple = new double[4];
-
-    // Abattement
-    private  int lAbtMax = 14171;
-    private  int lAbtMin = 495;
-    private double tAbt = 0.1;
-
-    // Plafond de baisse maximal par demi part
-    private double plafDemiPart = 1759;
-
-    private double seuilDecoteDeclarantSeul = 1929;
-    private double seuilDecoteDeclarantCouple    = 3191;
-
-    private double decoteMaxDeclarantSeul = 873;
-    private double decoteMaxDeclarantCouple = 1444;
-    private double tauxDecote = 0.4525;
+    // ===== Constantes EXG_IMPOT_07 : contribution exceptionnelle sur les hauts revenus =====
+    /** Limites des tranches de la CEHR (en euros). 5 valeurs pour 4 tranches. */
+    private static final int[] LIMITES_TRANCHES_CEHR = {
+            0, 250000, 500000, 1000000, Integer.MAX_VALUE
+    };
+    /** Taux de la CEHR pour une personne seule (célibataire, divorcé, veuf). */
+    private static final double[] TAUX_CEHR_CELIBATAIRE = {
+            0.0, 0.03, 0.04, 0.04
+    };
+    /** Taux de la CEHR pour un couple (marié, pacsé). */
+    private static final double[] TAUX_CEHR_COUPLE = {
+            0.0, 0.0, 0.03, 0.04
+    };
 
     // revenu net
     private int rNetDecl1 = 0;
@@ -183,35 +174,6 @@ public class SimulateurReusine {
         nbEnfH = nbEnfantsHandicapes;
         parIso = parentIsol;
 
-        limites[0] = l00;
-        limites[1] = l01;
-        limites[2] = l02;
-        limites[3] = l03;
-        limites[4] = l04;
-        limites[5] = l05;
-
-        taux[0] = t00;
-        taux[1] = t01;
-        taux[2] = t02;
-        taux[3] = t03;
-        taux[4] = t04;
-
-        limitesCEHR[0] = lce00;
-        limitesCEHR[1] = lce01;
-        limitesCEHR[2] = lce02;
-        limitesCEHR[3] = lce03;
-        limitesCEHR[4] = lce04;
-
-        tauxCEHRCelibataire[0] = tce00;
-        tauxCEHRCelibataire[1] = tce01;
-        tauxCEHRCelibataire[2] = tce02;
-        tauxCEHRCelibataire[3] = tce03;
-
-        tauxCEHRCouple[0] = tce00C;
-        tauxCEHRCouple[1] = tce01C;
-        tauxCEHRCouple[2] = tce02C;
-        tauxCEHRCouple[3] = tce03C;
-
         System.out.println("--------------------------------------------------");
         System.out.println( "Revenu net declarant1 : " + rNetDecl1 );
         System.out.println( "Revenu net declarant2 : " + rNetDecl2 );
@@ -219,25 +181,25 @@ public class SimulateurReusine {
 
         // Abattement
         // EXIGENCE : EXG_IMPOT_02
-        long abt1 = Math.round(rNetDecl1 * tAbt);
-        long abt2 = Math.round(rNetDecl2 * tAbt);
+        long abt1 = Math.round(rNetDecl1 * TAUX_ABATTEMENT);
+        long abt2 = Math.round(rNetDecl2 * TAUX_ABATTEMENT);
 
-        if (abt1 > lAbtMax) {
-            abt1 = lAbtMax;
+        if (abt1 > PLAFOND_ABATTEMENT) {
+            abt1 = PLAFOND_ABATTEMENT;
         }
         if ( sitFam == SituationFamiliale.MARIE || sitFam == SituationFamiliale.PACSE ) {
-            if (abt2 > lAbtMax) {
-                abt2 = lAbtMax;
+            if (abt2 > PLAFOND_ABATTEMENT) {
+                abt2 = PLAFOND_ABATTEMENT;
             }
         }
 
-        if (abt1 < lAbtMin) {
-            abt1 = lAbtMin;
+        if (abt1 < MINIMUM_ABATTEMENT) {
+            abt1 = MINIMUM_ABATTEMENT;
         }
 
         if ( sitFam == SituationFamiliale.MARIE || sitFam == SituationFamiliale.PACSE ) {
-            if (abt2 < lAbtMin) {
-                abt2 = lAbtMin;
+            if (abt2 < MINIMUM_ABATTEMENT) {
+                abt2 = MINIMUM_ABATTEMENT;
             }
         }
 
@@ -307,18 +269,18 @@ public class SimulateurReusine {
         contribExceptionnelle = 0;
         int i = 0;
         do {
-            if ( rFRef >= limitesCEHR[i] && rFRef < limitesCEHR[i+1] ) {
+            if ( rFRef >= LIMITES_TRANCHES_CEHR[i] && rFRef < LIMITES_TRANCHES_CEHR[i+1] ) {
                 if ( nbPtsDecl == 1 ) {
-                    contribExceptionnelle += ( rFRef - limitesCEHR[i] ) * tauxCEHRCelibataire[i];
+                    contribExceptionnelle += ( rFRef - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_CELIBATAIRE[i];
                 } else {
-                    contribExceptionnelle += ( rFRef - limitesCEHR[i] ) * tauxCEHRCouple[i];
+                    contribExceptionnelle += ( rFRef - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_COUPLE[i];
                 }
                 break;
             } else {
                 if ( nbPtsDecl == 1 ) {
-                    contribExceptionnelle += ( limitesCEHR[i+1] - limitesCEHR[i] ) * tauxCEHRCelibataire[i];
+                    contribExceptionnelle += ( LIMITES_TRANCHES_CEHR[i+1] - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_CELIBATAIRE[i];
                 } else {
-                    contribExceptionnelle += ( limitesCEHR[i+1] - limitesCEHR[i] ) * tauxCEHRCouple[i];
+                    contribExceptionnelle += ( LIMITES_TRANCHES_CEHR[i+1] - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_COUPLE[i];
                 }
             }
             i++;
@@ -335,11 +297,11 @@ public class SimulateurReusine {
 
         i = 0;
         do {
-            if ( rImposable >= limites[i] && rImposable < limites[i+1] ) {
-                mImpDecl += ( rImposable - limites[i] ) * taux[i];
+            if ( rImposable >= LIMITES_TRANCHES_IMPOT[i] && rImposable < LIMITES_TRANCHES_IMPOT[i+1] ) {
+                mImpDecl += ( rImposable - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
                 break;
             } else {
-                mImpDecl += ( limites[i+1] - limites[i] ) * taux[i];
+                mImpDecl += ( LIMITES_TRANCHES_IMPOT[i+1] - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
             }
             i++;
         } while( i < 5);
@@ -356,11 +318,11 @@ public class SimulateurReusine {
         i = 0;
 
         do {
-            if ( rImposable >= limites[i] && rImposable < limites[i+1] ) {
-                mImp += ( rImposable - limites[i] ) * taux[i];
+            if ( rImposable >= LIMITES_TRANCHES_IMPOT[i] && rImposable < LIMITES_TRANCHES_IMPOT[i+1] ) {
+                mImp += ( rImposable - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
                 break;
             } else {
-                mImp += ( limites[i+1] - limites[i] ) * taux[i];
+                mImp += ( LIMITES_TRANCHES_IMPOT[i+1] - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
             }
             i++;
         } while( i < 5);
@@ -381,7 +343,7 @@ public class SimulateurReusine {
         // dépassement plafond
         double ecartPts = nbPts - nbPtsDecl;
 
-        double plafond = (ecartPts / 0.5) * plafDemiPart;
+        double plafond = (ecartPts / 0.5) * PLAFOND_DEMI_PART;
 
         System.out.println( "Plafond de baisse autorisée " + plafond );
 
@@ -398,13 +360,13 @@ public class SimulateurReusine {
         decote = 0;
         // decote
         if ( nbPtsDecl == 1 ) {
-            if ( mImp < seuilDecoteDeclarantSeul ) {
-                decote = decoteMaxDeclarantSeul - ( mImp  * tauxDecote );
+            if ( mImp < SEUIL_DECOTE_DECLARANT_SEUL ) {
+                decote = DECOTE_MAX_DECLARANT_SEUL - ( mImp  * TAUX_DECOTE );
             }
         }
         if (  nbPtsDecl == 2 ) {
-            if ( mImp < seuilDecoteDeclarantCouple ) {
-                decote =  decoteMaxDeclarantCouple - ( mImp  * tauxDecote  );
+            if ( mImp < SEUIL_DECOTE_DECLARANT_COUPLE ) {
+                decote =  DECOTE_MAX_DECLARANT_COUPLE - ( mImp  * TAUX_DECOTE  );
             }
         }
         decote = Math.round( decote );
