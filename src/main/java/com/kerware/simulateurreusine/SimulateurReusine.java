@@ -184,78 +184,40 @@ public class SimulateurReusine {
         System.out.println( "Revenu fiscal de référence : " + rFRef );
 
 
-    // Parts fiscales
-    // EXIGENCE : EXG_IMPOT_03
+        // Parts fiscales
+        // EXIGENCE : EXG_IMPOT_03
         CalculateurParts calculateurParts = new CalculateurParts();
         nbPtsDecl = calculateurParts.calculerPartsDeclarants(sitFam);
         nbPts = calculateurParts.calculerPartsFoyer(sitFam, nbEnf, nbEnfH, parIso);
 
 
-        // EXIGENCE : EXG_IMPOT_07:
+        // EXIGENCE : EXG_IMPOT_07
         // Contribution exceptionnelle sur les hauts revenus
-        contribExceptionnelle = 0;
-        int i = 0;
-        do {
-            if ( rFRef >= LIMITES_TRANCHES_CEHR[i] && rFRef < LIMITES_TRANCHES_CEHR[i+1] ) {
-                if ( nbPtsDecl == 1 ) {
-                    contribExceptionnelle += ( rFRef - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_CELIBATAIRE[i];
-                } else {
-                    contribExceptionnelle += ( rFRef - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_COUPLE[i];
-                }
-                break;
-            } else {
-                if ( nbPtsDecl == 1 ) {
-                    contribExceptionnelle += ( LIMITES_TRANCHES_CEHR[i+1] - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_CELIBATAIRE[i];
-                } else {
-                    contribExceptionnelle += ( LIMITES_TRANCHES_CEHR[i+1] - LIMITES_TRANCHES_CEHR[i] ) * TAUX_CEHR_COUPLE[i];
-                }
-            }
-            i++;
-        } while( i < 5);
+        CalculateurImpotProgressif calculateurImpotProgressif = new CalculateurImpotProgressif();
+        double[] tauxCEHR = (nbPtsDecl == 1) ? TAUX_CEHR_CELIBATAIRE : TAUX_CEHR_COUPLE;
+        contribExceptionnelle = Math.round(
+                calculateurImpotProgressif.calculer(rFRef, LIMITES_TRANCHES_CEHR, tauxCEHR)
+        );
 
-        contribExceptionnelle = Math.round( contribExceptionnelle );
         System.out.println( "Contribution exceptionnelle sur les hauts revenus : " + contribExceptionnelle );
 
         // Calcul impôt des declarants
         // EXIGENCE : EXG_IMPOT_04
-        rImposable = rFRef / nbPtsDecl ;
-
-        mImpDecl = 0;
-
-        i = 0;
-        do {
-            if ( rImposable >= LIMITES_TRANCHES_IMPOT[i] && rImposable < LIMITES_TRANCHES_IMPOT[i+1] ) {
-                mImpDecl += ( rImposable - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
-                break;
-            } else {
-                mImpDecl += ( LIMITES_TRANCHES_IMPOT[i+1] - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
-            }
-            i++;
-        } while( i < 5);
-
-        mImpDecl = mImpDecl * nbPtsDecl;
-        mImpDecl = Math.round( mImpDecl );
+        rImposable = rFRef / nbPtsDecl;
+        mImpDecl = Math.round(
+                calculateurImpotProgressif.calculer(rImposable, LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
+                        * nbPtsDecl
+        );
 
         System.out.println( "Impôt brut des déclarants : " + mImpDecl );
 
         // Calcul impôt foyer fiscal complet
         // EXIGENCE : EXG_IMPOT_04
-        rImposable =  rFRef / nbPts;
-        mImp = 0;
-        i = 0;
-
-        do {
-            if ( rImposable >= LIMITES_TRANCHES_IMPOT[i] && rImposable < LIMITES_TRANCHES_IMPOT[i+1] ) {
-                mImp += ( rImposable - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
-                break;
-            } else {
-                mImp += ( LIMITES_TRANCHES_IMPOT[i+1] - LIMITES_TRANCHES_IMPOT[i] ) * TAUX_IMPOT[i];
-            }
-            i++;
-        } while( i < 5);
-
-        mImp = mImp * nbPts;
-        mImp = Math.round( mImp );
+        rImposable = rFRef / nbPts;
+        mImp = Math.round(
+                calculateurImpotProgressif.calculer(rImposable, LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
+                        * nbPts
+        );
 
         System.out.println( "Impôt brut du foyer fiscal complet : " + mImp );
 
