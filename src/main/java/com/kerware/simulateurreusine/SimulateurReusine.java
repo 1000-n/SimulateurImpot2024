@@ -4,14 +4,6 @@ import com.kerware.simulateur.SituationFamiliale;
 
 public class SimulateurReusine {
 
-    // ===== Constantes EXG_IMPOT_02 : abattement sur revenus nets =====
-    /** Plafond annuel de l'abattement par déclarant en 2024 (en euros). */
-    private static final int PLAFOND_ABATTEMENT = 14171;
-    /** Minimum annuel de l'abattement par déclarant en 2024 (en euros). */
-    private static final int MINIMUM_ABATTEMENT = 495;
-    /** Taux de l'abattement appliqué aux revenus nets déclarés (10%). */
-    private static final double TAUX_ABATTEMENT = 0.1;
-
 
     // ===== Constantes EXG_IMPOT_04 : barème progressif de l'impôt sur le revenu =====
     /** Limites des tranches d'imposition (en euros). 6 valeurs pour 5 tranches. */
@@ -181,29 +173,7 @@ public class SimulateurReusine {
 
         // Abattement
         // EXIGENCE : EXG_IMPOT_02
-        long abt1 = Math.round(rNetDecl1 * TAUX_ABATTEMENT);
-        long abt2 = Math.round(rNetDecl2 * TAUX_ABATTEMENT);
-
-        if (abt1 > PLAFOND_ABATTEMENT) {
-            abt1 = PLAFOND_ABATTEMENT;
-        }
-        if ( sitFam == SituationFamiliale.MARIE || sitFam == SituationFamiliale.PACSE ) {
-            if (abt2 > PLAFOND_ABATTEMENT) {
-                abt2 = PLAFOND_ABATTEMENT;
-            }
-        }
-
-        if (abt1 < MINIMUM_ABATTEMENT) {
-            abt1 = MINIMUM_ABATTEMENT;
-        }
-
-        if ( sitFam == SituationFamiliale.MARIE || sitFam == SituationFamiliale.PACSE ) {
-            if (abt2 < MINIMUM_ABATTEMENT) {
-                abt2 = MINIMUM_ABATTEMENT;
-            }
-        }
-
-        abt = abt1 + abt2;
+        abt = new CalculateurAbattement().calculer(rNetDecl1, rNetDecl2, sitFam);
         System.out.println( "Abattement : " + abt );
 
         rFRef = rNetDecl1 + revNetDecl2 - abt;
