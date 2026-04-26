@@ -15,9 +15,6 @@ public class SimulateurReusine {
             0.0, 0.11, 0.30, 0.41, 0.45
     };
 
-    // ===== Constantes EXG_IMPOT_05 : plafonnement du quotient familial =====
-    /** Plafond du gain d'impôt apporté par chaque demi-part supplémentaire (en euros). */
-    private static final double PLAFOND_DEMI_PART = 1759;
 
     /** Nombre maximum d'enfants à charge supporté par le simulateur. */
     private static final int NB_MAX_ENFANTS = 7;
@@ -128,21 +125,10 @@ public class SimulateurReusine {
                         * nombrePartsFoyer
         );
 
-        // Vérification de la baisse d'impôt autorisée
+        // Plafonnement du gain lié au quotient familial
         // EXIGENCE : EXG_IMPOT_05
-        // baisse impot
-
-        double baisseImpot = impotDeclarants - impotNet;
-
-        // dépassement plafond
-        double ecartPts = nombrePartsFoyer - nombrePartsDeclarants;
-
-        double plafond = (ecartPts / 0.5) * PLAFOND_DEMI_PART;
-
-        if ( baisseImpot >= plafond ) {
-            impotNet = impotDeclarants - plafond;
-        }
-
+        impotNet = new CalculateurPlafonnement().appliquerPlafonnement(
+                impotDeclarants, impotNet, nombrePartsDeclarants, nombrePartsFoyer);
         impotAvantDecote = impotNet;
 
         // Calcul de la decote
