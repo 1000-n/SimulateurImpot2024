@@ -91,25 +91,14 @@ public class SimulateurReusine {
         verifierPreconditions(revenuNetDeclarant1, revenuNetDeclarant2,
                 situationFamiliale, nombreEnfants, nombreEnfantsHandicapes, parentIsole);
 
-        // Initialisation des variables
-
-        System.out.println("--------------------------------------------------");
-        System.out.println( "Revenu net declarant1 : " + revenuNetDeclarant1 );
-        System.out.println( "Revenu net declarant2 : " + revenuNetDeclarant2 );
-        System.out.println( "Situation familiale : " + situationFamiliale.name() );
-
         // Abattement
         // EXIGENCE : EXG_IMPOT_02
         abattement = new CalculateurAbattement().calculer(revenuNetDeclarant1, revenuNetDeclarant2, situationFamiliale);
-        System.out.println( "Abattement : " + abattement );
 
         revenuFiscalReference = revenuNetDeclarant1 + revenuNetDeclarant2 - abattement;
         if ( revenuFiscalReference < 0 ) {
             revenuFiscalReference = 0;
         }
-
-        System.out.println( "Revenu fiscal de référence : " + revenuFiscalReference );
-
 
         // Parts fiscales
         // EXIGENCE : EXG_IMPOT_03
@@ -122,8 +111,6 @@ public class SimulateurReusine {
         contribExceptionnelle = new CalculateurContributionExceptionnelle()
                 .calculer(revenuFiscalReference, nombrePartsDeclarants);
 
-        System.out.println( "Contribution exceptionnelle sur les hauts revenus : " + contribExceptionnelle );
-
         // Calcul impôt des declarants
         // EXIGENCE : EXG_IMPOT_04
         revenuImposable = revenuFiscalReference / nombrePartsDeclarants;
@@ -133,8 +120,6 @@ public class SimulateurReusine {
                         * nombrePartsDeclarants
         );
 
-        System.out.println( "Impôt brut des déclarants : " + impotDeclarants );
-
         // Calcul impôt foyer fiscal complet
         // EXIGENCE : EXG_IMPOT_04
         revenuImposable = revenuFiscalReference / nombrePartsFoyer;
@@ -143,35 +128,26 @@ public class SimulateurReusine {
                         * nombrePartsFoyer
         );
 
-        System.out.println( "Impôt brut du foyer fiscal complet : " + impotNet );
-
         // Vérification de la baisse d'impôt autorisée
         // EXIGENCE : EXG_IMPOT_05
         // baisse impot
 
         double baisseImpot = impotDeclarants - impotNet;
 
-        System.out.println( "Baisse d'impôt : " + baisseImpot );
-
         // dépassement plafond
         double ecartPts = nombrePartsFoyer - nombrePartsDeclarants;
 
         double plafond = (ecartPts / 0.5) * PLAFOND_DEMI_PART;
 
-        System.out.println( "Plafond de baisse autorisée " + plafond );
-
         if ( baisseImpot >= plafond ) {
             impotNet = impotDeclarants - plafond;
         }
 
-        System.out.println( "Impôt brut après plafonnement avant decote : " + impotNet );
         impotAvantDecote = impotNet;
 
         // Calcul de la decote
         // EXIGENCE : EXG_IMPOT_06
         decote = new CalculateurDecote().calculer(impotNet, nombrePartsDeclarants);
-
-        System.out.println( "Decote : " + decote );
 
         impotNet = impotNet - decote;
 
@@ -179,7 +155,6 @@ public class SimulateurReusine {
 
         impotNet = Math.round( impotNet );
 
-        System.out.println( "Impôt sur le revenu net final : " + impotNet );
         return  (int)impotNet;
     }
 
