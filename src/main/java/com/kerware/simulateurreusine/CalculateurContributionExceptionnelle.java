@@ -8,7 +8,7 @@ package com.kerware.simulateurreusine;
  *  - Barèmes différents pour personne seule et couple
  *  - Calcul progressif identique au barème de l'impôt principal
  */
-public class CalculateurContributionExceptionnelle {
+public final class CalculateurContributionExceptionnelle {
 
     /** Limites des tranches de la CEHR (en euros). 5 valeurs pour 4 tranches. */
     private static final int[] LIMITES_TRANCHES_CEHR = {
@@ -26,7 +26,8 @@ public class CalculateurContributionExceptionnelle {
     /** Nombre de parts d'un déclarant seul. */
     private static final double PARTS_DECLARANT_SEUL = 1.0;
 
-    private final CalculateurImpotProgressif calculateurProgressif = new CalculateurImpotProgressif();
+    private final CalculateurImpotProgressif calculateurProgressif
+            = new CalculateurImpotProgressif();
 
     /**
      * Calcule la contribution exceptionnelle sur les hauts revenus.
@@ -41,7 +42,8 @@ public class CalculateurContributionExceptionnelle {
                 : TAUX_CEHR_COUPLE;
 
         return Math.round(
-                calculateurProgressif.calculer(revenuFiscalReference, LIMITES_TRANCHES_CEHR, tauxApplicables)
+                calculateurProgressif.calculer(revenuFiscalReference,
+                        LIMITES_TRANCHES_CEHR, tauxApplicables)
         );
     }
 }

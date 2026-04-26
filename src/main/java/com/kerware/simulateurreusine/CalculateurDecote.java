@@ -9,7 +9,7 @@ package com.kerware.simulateurreusine;
  *  - Formule : decote = decoteMax - (impot * tauxDecote)
  *  - La décote ne peut pas dépasser le montant de l'impôt lui-même
  */
-public class CalculateurDecote {
+public final class CalculateurDecote {
 
     /** Seuil d'impôt en deçà duquel la décote s'applique pour un déclarant seul. */
     private static final double SEUIL_DECOTE_DECLARANT_SEUL = 1929;

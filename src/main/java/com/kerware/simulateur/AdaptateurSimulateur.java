@@ -1,6 +1,6 @@
 package com.kerware.simulateur;
 
-public class AdaptateurSimulateur implements ICalculateurImpot {
+public final class AdaptateurSimulateur implements ICalculateurImpot {
 
     private Simulateur simulateur = new Simulateur();
 
@@ -44,7 +44,8 @@ public class AdaptateurSimulateur implements ICalculateurImpot {
 
     @Override
     public void calculImpotSurRevenuNet() {
-         simulateur.calculImpot(revenusNetDecl1, revenusNetDecl2 ,situationFamiliale, nbEnfantsACharge, nbEnfantsSituationHandicap, parentIsole);
+         simulateur.calculImpot(revenusNetDecl1, revenusNetDecl2,
+                 situationFamiliale, nbEnfantsACharge, nbEnfantsSituationHandicap, parentIsole);
     }
 
     @Override

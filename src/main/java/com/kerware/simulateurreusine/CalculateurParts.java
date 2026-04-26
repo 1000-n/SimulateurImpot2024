@@ -13,7 +13,7 @@ import com.kerware.simulateur.SituationFamiliale;
  *  - 0,5 part supplémentaire pour un parent isolé avec enfants
  *  - 1 part supplémentaire pour un veuf avec enfants à charge
  */
-public class CalculateurParts {
+public final class CalculateurParts {
 
     /** Demi-part par enfant pour les 2 premiers. */
     private static final double DEMI_PART_PAR_ENFANT = 0.5;
@@ -55,7 +55,8 @@ public class CalculateurParts {
         if (nbEnfants <= SEUIL_NB_ENFANTS_PART_COMPLETE) {
             return nbEnfants * DEMI_PART_PAR_ENFANT;
         }
-        // 1 part pour les 2 premiers enfants (0.5 + 0.5) + 1 part complète par enfant supplémentaire
+        // 1 part pour les 2 premiers enfants (0.5 + 0.5) + 1 part complète par enfant
+        // supplémentaire
         return 1.0 + (nbEnfants - SEUIL_NB_ENFANTS_PART_COMPLETE) * PART_PAR_ENFANT_AU_DELA_DE_2;
     }
 

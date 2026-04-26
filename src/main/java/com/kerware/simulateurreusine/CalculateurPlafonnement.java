@@ -9,7 +9,7 @@ package com.kerware.simulateurreusine;
  *  - Cette réduction est cependant plafonnée à un montant fixe par demi-part supplémentaire
  *  - Si le gain réel dépasse ce plafond, on applique la limite au lieu du gain réel
  */
-public class CalculateurPlafonnement {
+public final class CalculateurPlafonnement {
 
     /** Plafond du gain d'impôt apporté par chaque demi-part supplémentaire (en euros). */
     private static final double PLAFOND_DEMI_PART = 1759;

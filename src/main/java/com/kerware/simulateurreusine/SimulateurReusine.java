@@ -2,7 +2,7 @@ package com.kerware.simulateurreusine;
 
 import com.kerware.simulateur.SituationFamiliale;
 
-public class SimulateurReusine {
+public final class SimulateurReusine {
 
 
     // ===== Constantes EXG_IMPOT_04 : barème progressif de l'impôt sur le revenu =====
@@ -23,9 +23,6 @@ public class SimulateurReusine {
 
     // revenu fiscal de référence
     private double revenuFiscalReference = 0;
-
-    // revenu imposable
-    private double revenuImposable = 0;
 
     // abattement
     private double abattement = 0;
@@ -79,68 +76,54 @@ public class SimulateurReusine {
 
     // Fonction de calcul de l'impôt sur le revenu net en France en 2024 sur les revenu 2023
 
-    public int calculImpot(int revenuNetDeclarant1,
-                           int revenuNetDeclarant2,
+    public int calculImpot(int revenuNetDeclarant1, int revenuNetDeclarant2,
                            SituationFamiliale situationFamiliale,
                            int nombreEnfants, int nombreEnfantsHandicapes,
                            boolean parentIsole) {
-
         verifierPreconditions(revenuNetDeclarant1, revenuNetDeclarant2,
                 situationFamiliale, nombreEnfants, nombreEnfantsHandicapes, parentIsole);
 
-        // Abattement
-        // EXIGENCE : EXG_IMPOT_02
-        abattement = new CalculateurAbattement().calculer(revenuNetDeclarant1, revenuNetDeclarant2, situationFamiliale);
+        // Abattement - EXIGENCE : EXG_IMPOT_02
+        abattement = new CalculateurAbattement().calculer(
+                revenuNetDeclarant1, revenuNetDeclarant2, situationFamiliale);
+        revenuFiscalReference = Math.max(0, revenuNetDeclarant1 +revenuNetDeclarant2 - abattement);
 
-        revenuFiscalReference = revenuNetDeclarant1 + revenuNetDeclarant2 - abattement;
-        if ( revenuFiscalReference < 0 ) {
-            revenuFiscalReference = 0;
-        }
-
-        // Parts fiscales
-        // EXIGENCE : EXG_IMPOT_03
+        // Parts fiscales - EXIGENCE : EXG_IMPOT_03
         CalculateurParts calculateurParts = new CalculateurParts();
         nombrePartsDeclarants = calculateurParts.calculerPartsDeclarants(situationFamiliale);
-        nombrePartsFoyer = calculateurParts.calculerPartsFoyer(situationFamiliale, nombreEnfants, nombreEnfantsHandicapes, parentIsole);
+        nombrePartsFoyer = calculateurParts.calculerPartsFoyer(
+                situationFamiliale, nombreEnfants, nombreEnfantsHandicapes, parentIsole);
 
-        // EXIGENCE : EXG_IMPOT_07
-        // Contribution exceptionnelle sur les hauts revenus
+        // Contribution exceptionnelle sur les hauts revenus - EXIGENCE : EXG_IMPOT_07
         contribExceptionnelle = new CalculateurContributionExceptionnelle()
                 .calculer(revenuFiscalReference, nombrePartsDeclarants);
 
-        // Calcul impôt des declarants
-        // EXIGENCE : EXG_IMPOT_04
-        revenuImposable = revenuFiscalReference / nombrePartsDeclarants;
+        // Calcul impôt des declarants - EXIGENCE : EXG_IMPOT_04
+        double revenuImposable = revenuFiscalReference / nombrePartsDeclarants;
         CalculateurImpotProgressif calculateurImpotProgressif = new CalculateurImpotProgressif();
         impotDeclarants = Math.round(
-                calculateurImpotProgressif.calculer(revenuImposable, LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
+                calculateurImpotProgressif.calculer(revenuImposable,
+                        LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
                         * nombrePartsDeclarants
         );
-
-        // Calcul impôt foyer fiscal complet
-        // EXIGENCE : EXG_IMPOT_04
+        // Calcul impôt foyer fiscal complet - EXIGENCE : EXG_IMPOT_04
         revenuImposable = revenuFiscalReference / nombrePartsFoyer;
         impotNet = Math.round(
-                calculateurImpotProgressif.calculer(revenuImposable, LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
+                calculateurImpotProgressif.calculer(revenuImposable,
+                        LIMITES_TRANCHES_IMPOT, TAUX_IMPOT)
                         * nombrePartsFoyer
         );
-
-        // Plafonnement du gain lié au quotient familial
-        // EXIGENCE : EXG_IMPOT_05
+        // Plafonnement du gain lié au quotient familial - EXIGENCE : EXG_IMPOT_05
         impotNet = new CalculateurPlafonnement().appliquerPlafonnement(
                 impotDeclarants, impotNet, nombrePartsDeclarants, nombrePartsFoyer);
         impotAvantDecote = impotNet;
 
-        // Calcul de la decote
-        // EXIGENCE : EXG_IMPOT_06
+        // Calcul de la decote - EXIGENCE : EXG_IMPOT_06
         decote = new CalculateurDecote().calculer(impotNet, nombrePartsDeclarants);
 
         impotNet = impotNet - decote;
-
         impotNet += contribExceptionnelle;
-
         impotNet = Math.round( impotNet );
-
         return  (int)impotNet;
     }
 
@@ -160,14 +143,16 @@ public class SimulateurReusine {
             throw new IllegalArgumentException("Le nombre d'enfants ne peut pas être négatif");
         }
         if (nbEnfantsHandicapes < 0) {
-            throw new IllegalArgumentException("Le nombre d'enfants handicapés ne peut pas être négatif");
+            throw new IllegalArgumentException("Le nombre d'enfants handicapés ne peut pas " +
+                    "être négatif");
         }
         if (situationFamiliale == null) {
             throw new IllegalArgumentException("La situation familiale ne peut pas être null");
         }
         if (nbEnfantsHandicapes > nbEnfants) {
             throw new IllegalArgumentException(
-                    "Le nombre d'enfants handicapés ne peut pas être supérieur au nombre d'enfants");
+                    "Le nombre d'enfants handicapés ne peut pas être supérieur au " +
+                            "nombre d'enfants");
         }
         if (nbEnfants > NB_MAX_ENFANTS) {
             throw new IllegalArgumentException(
@@ -178,12 +163,14 @@ public class SimulateurReusine {
         }
         if (estSeul(situationFamiliale) && revenuNetDeclarant2 > 0) {
             throw new IllegalArgumentException(
-                    "Un célibataire, un divorcé ou un veuf ne peut pas avoir de revenu pour le déclarant 2");
+                    "Un célibataire, un divorcé ou un veuf ne peut pas avoir de revenu pour le " +
+                            "déclarant 2");
         }
     }
 
     private boolean estCouple(SituationFamiliale situationFamiliale) {
-        return situationFamiliale == SituationFamiliale.MARIE || situationFamiliale == SituationFamiliale.PACSE;
+        return situationFamiliale == SituationFamiliale.MARIE
+                || situationFamiliale == SituationFamiliale.PACSE;
     }
 
     private boolean estSeul(SituationFamiliale situationFamiliale) {

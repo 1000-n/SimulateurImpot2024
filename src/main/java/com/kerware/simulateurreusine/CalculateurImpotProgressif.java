@@ -15,7 +15,7 @@ package com.kerware.simulateurreusine;
  * (0% jusqu'à 11294€, 11% jusqu'à 28797€, 30% au-delà) :
  *   (28797 - 11294) * 11% + (30000 - 28797) * 30% = 1925 + 361 = 2286€
  */
-public class CalculateurImpotProgressif {
+public final class CalculateurImpotProgressif {
 
     /**
      * Calcule un montant progressif sur les tranches.

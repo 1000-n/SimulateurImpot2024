@@ -11,7 +11,7 @@ import com.kerware.simulateur.SituationFamiliale;
  *  - minimum MINIMUM_ABATTEMENT par déclarant
  *  - l'abattement du foyer est la somme des deux abattements individuels
  */
-public class CalculateurAbattement {
+public final class CalculateurAbattement {
 
     /** Plafond annuel de l'abattement par déclarant en 2024 (en euros). */
     private static final int PLAFOND_ABATTEMENT = 14171;
