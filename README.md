@@ -1,4 +1,4 @@
-s# Simulateur Impôt 2024
+# Simulateur Impôt 2024
 
 Mini-projet IUT — Tests unitaires fonctionnels et refactoring de code hérité.
 
